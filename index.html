@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html xml:lang="es" lang="es" xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+	<link rel="stylesheet" href="css/css.css" type="text/css" />
+	<title>The Marlboro Man's Tile Mapper</title>
+	<base href="" />
+	<script type="text/javascript" src="js/js.js"></script>
+	<script type="text/javascript" src="js/lector_doc.js"></script>
+	<script type="text/javascript" src="js/lector_XML.js"></script>
+</head>
+<body>
+	<style style="text/css" id="estilos_inline"></style>
+	<style style="text/css" id="estilos_inline_rejilla">
+#tablas table tr:nth-child(19n+1) {border-top: 1px solid #55A;}
+#tablas table tr td:nth-child(25n+1) {border-left: 1px solid #55A;}
+	</style>
+
+	<div id="tablas"></div>
+
+	<div id="herramientas" class="pop_up oculto">
+		<div id="herramientas_generales" class="ui_form_generico">
+
+			<div>
+				<input type="button" class="btn" id="btn_importar" value="Importar" />
+				<input type="button" class="btn" id="btn_exportar" value="Exportar" />
+				<input type="button" class="btn" id="btn_nueva_tabla" value="Nueva tabla" />
+				<input type="button" class="btn" id="btn_eliminar_tabla" value="Borrar" />
+				<input type="button" class="btn" id="btn_tabla_anterior" value="Anterior" />
+				<input type="button" class="btn" id="btn_tabla_siguiente" value="Siguiente" />
+			</div>
+			<div>
+				<label for="redim_w">W: <input class="txt" type="text" id="redim_w" value="10" /></label>
+				<label for="redim_h">H: <input class="txt" type="text" id="redim_h" value="10" /></label>
+				<input type="button" class="btn" id="btn_redimensionar" value="Redimensionar" />
+			</div>
+
+			<div>
+				<label for="grid_w">SW: <input class="txt" type="text" id="grid_w" value="25" /></label>
+				<label for="grid_h">SH: <input class="txt" type="text" id="grid_h" value="19" /></label>
+				<input type="button" class="btn" id="btn_rejilla" value="Reajustar" />
+			</div>
+
+			<ul id="listado_tablas"></ul>
+		</div>
+
+		<div id="herramientas_tabla" class="ui_form_generico">
+			<div><label for="select_set">Set: <select id="select_set"></select></label></div>
+			<div><label for="input_opacidad">Opacidad: <input class="txt" type="text" id="input_opacidad" value="100" /></label></div>
+<!--			<div><label for="input_orden">Orden: <input class="txt" type="text" id="input_orden" value="1" /></label></div>-->
+			<ul id="listado_tiles"></ul>
+		</div>
+	</div>
+
+	<div id="caja_exportar" class="oculto ui_form_generico pop_up">
+		<input class="btn" type="button" value="&times;" id="btn_cerrar_exportar"/>
+		<textarea id="p_exportar"></textarea>
+<!--		<label><input type="checkbox" id="check_exportar_una_linea" /> Exportar en una l&iacute;nea</label>-->
+		<input class="btn" type="button" id="btn_ejecutar_exportacion" value="Exportar" />
+	</div>
+
+	<div id="caja_importar" class="oculto ui_form_generico pop_up">
+		<input class="btn" type="button" value="&times;" id="btn_cerrar_importar"/>
+		<textarea class="txt" name="texto" id="textarea_importar"></textarea>
+<!--		<label><input type="checkbox" id="check_importar_una_linea" /> Importar en una l&iacute;nea</label>-->
+		<input class="btn" type="button" id="btn_ejecutar_importacion" value="Importar" />
+	</div>
+
+	<div id="navegacion"></div>
+
+	<div id="ayuda">
+		CTRL+Click para men&uacute;. MAY+Click para l&iacute;neas.
+	</div>
+</body>
+</html>
