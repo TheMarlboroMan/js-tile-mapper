@@ -195,10 +195,10 @@ Tabla.prototype.importar_json=function(config, datos) {
 
 	this.importar_linea_configuracion_json(config);
 	var aquello=this;
+	var set=CS.obtener_set_por_titulo(this.titulo_set);
+console.log(datos);
 	datos.forEach(function(_item) {
-		var x=0;
-		var y=0;
-		var set=CS.obtener_set_por_titulo(this.titulo_set);
+console.log(_item);
 		var c=aquello.obtener_celda_coordenadas(_item.x, _item.y);
 		if(c) {
 			var pt=_item.t;
@@ -208,8 +208,7 @@ Tabla.prototype.importar_json=function(config, datos) {
 	});
 }
 
-Tabla.prototype.importar_linea_estado=function(linea)
-{
+Tabla.prototype.importar_linea_estado=function(linea) {
 	var l=linea.length;
 	var i=0;
 
@@ -308,7 +307,6 @@ Tabla.prototype.exportar=function() {
 		}
 
 		texto+="\n";
-//		if(!C_EXP.es_exportar_una_linea()) texto+="\n";
 	}
 
 	texto+="\n";
@@ -333,19 +331,16 @@ Tabla.prototype.exportar_json=function() {
 	var set=CS.obtener_set_por_titulo(this.titulo_set);
 
 	while(i < lf) {
-		var fila=filas[i++];
-		var celdas=fila.querySelectorAll('td');
-		var lc=celdas.length;
-
+		var celdas=filas[i].querySelectorAll('td');
 		var j=0;
 
-		while(j < lc) {
-			var clase=celdas[j++].className;
-			var num=clase.replace('tipo_', '');
+		while(j < celdas.length) {
+			var num=celdas[j].className.replace('tipo_', '');
 			if(set) num=set.traducir(num);
-
 			resultado.celdas.push({'x': j, 'y': i, 't':num});
+			j++;
 		}
+		i++;
 	}
 
 	return resultado;
