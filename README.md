@@ -15,3 +15,9 @@ Even if I don't feel like diving in, I could get away with this:
 	- Add an optional translation for each cell (cells are square, width is assumed to be same as height).
 - Do it ECMA6 style.
 	- We could get rid of a lot of var aquello=this;.
+
+# Credits:
+
+Background tileset from:
+
+	-https://opengameart.org/content/generic-platformer-tileset-16x16-background
