@@ -20,11 +20,6 @@
 </head>
 <body>
 	<style style="text/css" id="estilos_inline"></style>
-	<style style="text/css" id="estilos_inline_rejilla">
-<!-- TODO: What is this??? -->
-#tablas table tr:nth-child(19n+1) {border-top: 1px solid #55A;}
-#tablas table tr td:nth-child(25n+1) {border-left: 1px solid #55A;}
-	</style>
 
 	<div id="tablas"></div>
 
@@ -44,12 +39,13 @@
 				<label for="redim_h">H: <input class="txt" type="text" id="redim_h" value="10" /></label>
 				<input type="button" class="btn" id="btn_redimensionar" value="Redimensionar" />
 			</div>
-
+<!--
 			<div>
-				<label for="grid_w">SW: <input class="txt" type="text" id="grid_w" value="25" /></label>
-				<label for="grid_h">SH: <input class="txt" type="text" id="grid_h" value="19" /></label>
+				<label for="grid_w">CW: <input class="txt" type="text" id="grid_w" value="16" /></label>
+				<label for="grid_h">CH: <input class="txt" type="text" id="grid_h" value="16" /></label>
 				<input type="button" class="btn" id="btn_rejilla" value="Reajustar" />
 			</div>
+-->
 
 			<ul id="listado_tablas"></ul>
 		</div>
@@ -65,15 +61,15 @@
 	<div id="caja_exportar" class="oculto ui_form_generico pop_up">
 		<input class="btn" type="button" value="&times;" id="btn_cerrar_exportar"/>
 		<textarea id="p_exportar"></textarea>
-<!--		<label><input type="checkbox" id="check_exportar_una_linea" /> Exportar en una l&iacute;nea</label>-->
-		<input class="btn" type="button" id="btn_ejecutar_exportacion" value="Exportar" />
+		<input class="btn" type="button" id="btn_exportar_txt" value="Exportar TXT" />
+		<input class="btn" type="button" id="btn_exportar_json" value="Exportar JSON" />
 	</div>
 
 	<div id="caja_importar" class="oculto ui_form_generico pop_up">
 		<input class="btn" type="button" value="&times;" id="btn_cerrar_importar"/>
 		<textarea class="txt" name="texto" id="textarea_importar"></textarea>
-<!--		<label><input type="checkbox" id="check_importar_una_linea" /> Importar en una l&iacute;nea</label>-->
-		<input class="btn" type="button" id="btn_ejecutar_importacion" value="Importar" />
+		<input class="btn" type="button" id="btn_importar_txt" value="Importar TXT" />
+		<input class="btn" type="button" id="btn_importar_json" value="Importar JSON" />
 	</div>
 
 	<div id="navegacion"></div>

@@ -1,5 +1,4 @@
-function Set_tiles()
-{
+function Set_tiles() {
 	this.titulo='';
 	this.H=0;
 	this.W=0;
@@ -8,8 +7,7 @@ function Set_tiles()
 
 Set_tiles.prototype.obtener_dim_celda=function() {return this.H-2;}
 
-Set_tiles.prototype.generar_cadena_css=function()
-{
+Set_tiles.prototype.generar_cadena_css=function() {
 	var resultado="";
 	var dim_celda=this.H-2;
 	var total=this.W / this.H;
@@ -18,8 +16,7 @@ Set_tiles.prototype.generar_cadena_css=function()
 
 	resultado+="#tablas table."+this.titulo+" tr td {width: "+dim_celda+"px; height: "+dim_celda+"px; background-image: url(sets/"+this.titulo+".png);}\n";
 
-	while(i < total)
-	{
+	while(i < total) {
 		resultado+="#tablas table."+this.titulo+" tr td.tipo_"+i+" {background-position: "+x+"px 0px;}\n";
 		++i;
 		x-=this.H;
@@ -30,8 +27,7 @@ Set_tiles.prototype.generar_cadena_css=function()
 
 	i=0;
 	x=0;
-	while(i < total)
-	{
+	while(i < total) {
 		resultado+="#herramientas #herramientas_tabla ul#listado_tiles."+this.titulo+" li.tipo_"+i+" label {background-position: "+x+"px 0px;}\n";
 		++i;
 		x-=this.H;
@@ -41,33 +37,28 @@ Set_tiles.prototype.generar_cadena_css=function()
 }
 
 //Tipo a texto
-Set_tiles.prototype.traducir=function(indice)
-{
+Set_tiles.prototype.traducir=function(indice) {
 	if(!this.traduccion || !this.traduccion.length) return indice;
 	else return this.traduccion[indice];
 }
 
 //Texto a tipo...
-Set_tiles.prototype.traducir_inversa=function(texto)
-{
+Set_tiles.prototype.traducir_inversa=function(texto) {
 	if(!this.traduccion || !this.traduccion.length) return texto;
 	else return this.traduccion.indexOf(texto);
 }
 
-Set_tiles.prototype.rellenar_selector=function(ul)
-{
+Set_tiles.prototype.rellenar_selector=function(ul) {
 	ul.className=this.titulo;
 
 	var total=this.W / this.H;
 	var i=0;
 
-	function click_input(input, i)
-	{
+	function click_input(input, i) 	{
 		input.onclick=function() {H.establecer_tipo_actual(i);}
 	}
 
-	while(i < total)
-	{
+	while(i < total) {
 		var li=document.createElement('li');
 		li.className='tipo_'+i;
 		ul.appendChild(li);

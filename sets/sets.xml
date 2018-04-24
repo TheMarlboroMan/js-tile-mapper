@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <r>
-	<set titulo="plataformas" trans=" #-HMx\|/=" />		
-	<set titulo="control" trans=" #=-/Z\S{&lt;}&gt;7P95HMx" />		
-	<set titulo="control_big" trans=" #=-/Z\S{&lt;}&gt;7P95HMx" />		
+	<set titulo="plataformas" trans=" #-HMx\|/=" />	
+	<set titulo="control" trans=" #=-/Z\S{&lt;}&gt;7P95HMx" />
+	<set titulo="control_big" trans=" #=-/Z\S{&lt;}&gt;7P95HMx" />
 	<set titulo="basico"  />
 	<set titulo="basico2" />
+	<set titulo="basico_16" />
 </r>

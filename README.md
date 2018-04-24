@@ -3,8 +3,7 @@ JS tile mapper. A very simple distraction.
 
 # TODO: 
 
-- Separate into various files
 - Fix cell resizing.
 - Add support for custom sets.
-- Add support for multiple export types.
-
+- Add support for json IMPORT
+- Do it ECMA6 style.

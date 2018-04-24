@@ -3,8 +3,8 @@ function Herramientas_tabla()
 	this.DOM_contenedor=document.getElementById('herramientas');
 	this.input_w=document.getElementById('redim_w');
 	this.input_h=document.getElementById('redim_h');
-	this.input_grid_w=document.getElementById('grid_w');
-	this.input_grid_h=document.getElementById('grid_h');
+//	this.input_grid_w=document.getElementById('grid_w');
+//	this.input_grid_h=document.getElementById('grid_h');
 	this.lista_tiles=document.getElementById('listado_tiles');
 	//this.lista_tablas=document.getElementById('listado_tablas');
 	this.select_set=document.getElementById('select_set');
@@ -20,31 +20,22 @@ function Herramientas_tabla()
 
 	var aquello=this;
 
-	this.establecer_wh=function(w, h)
-	{
+	this.establecer_wh=function(w, h) {
 		aquello.input_w.value=w;
 		aquello.input_h.value=h;
 	}
 
-	this.btn_rejilla.onclick=function() 
-	{
-		var w=parseInt(aquello.input_grid_w.value, 10);
-		var h=parseInt(aquello.input_grid_h.value, 10);
+//	this.btn_rejilla.onclick=function() {
+//		CT.reajustar_tamano_celdas(aquello.obtener_w_celda(), aquello.obtener_h_celda());
+//	}
 
-//		var txt="#tablas table tr:nth-child("+h+"n+1) {border-top: 1px solid #55A;}\n";
-//		txt+="#tablas table tr td:nth-child("+w+"n+1) {border-left: 1px solid #55A;}";
-//		document.getElementById('estilos_inline_rejilla').innerHTML=txt;
-		CT.reajustar_tamano_celdas(w, h);
-
-	}
 	this.btn_redimensionar.onclick=function() {CT.redimensionar_tablas(aquello.obtener_w(), aquello.obtener_h());}
 	this.btn_exportar.onclick=function() 
 	{
 		C_IMP.ocultar();
 		C_EXP.mostrar();
 	}
-	this.btn_importar.onclick=function() 
-	{
+	this.btn_importar.onclick=function() {
 		C_EXP.ocultar();
 		C_IMP.vaciar();
 		C_IMP.mostrar();
@@ -86,6 +77,9 @@ Herramientas_tabla.prototype.mostrar=function(event)
 Herramientas_tabla.prototype.ocultar=function(){this.DOM_contenedor.classList.add('oculto');}
 Herramientas_tabla.prototype.obtener_w=function(){return parseInt(this.input_w.value, 10);}
 Herramientas_tabla.prototype.obtener_h=function(){return parseInt(this.input_h.value, 10);}
+//Herramientas_tabla.prototype.obtener_w_celda=function(){return parseInt(this.input_grid_w.value, 10);}
+//Herramientas_tabla.prototype.obtener_h_celda=function(){return parseInt(this.input_grid_h.value, 10);}
+
 Herramientas_tabla.prototype.establecer_clase_celda=function(c){c.className='tipo_'+this.obtener_tipo_actual();}
 Herramientas_tabla.prototype.establecer_clase_celda_manual=function(c, t){c.className='tipo_'+t;}
 Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_selector_tiles(this.select_set);}
@@ -113,7 +107,10 @@ Herramientas_tabla.prototype.recargar_listado_tiles=function(indice)
 	if(s) s.rellenar_selector(this.lista_tiles);
 }
 
-Herramientas_tabla.prototype.importar=function(texto) 
-{
+Herramientas_tabla.prototype.importar=function(texto) {
 	CT.importar(texto);
+}
+
+Herramientas_tabla.prototype.importar_json=function(datos) {
+	CT.importar_json(datos);
 }

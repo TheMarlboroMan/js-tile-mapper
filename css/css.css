@@ -6,13 +6,13 @@ body {background: #f0f0f0; font-family: monospace;}
 #navegacion {position: fixed; background: #000; text-align: center; width: 100px; color: #fff; padding: 10px; bottom: 0px; left: 10%; border-radius: 10px 10px 0px 0px; z-index: 10000;}
 
 #tablas {}
-#tablas table {border-collapse: collapse; empty-cells:show; position: absolute; top: 0px; left: 0px;}
+#tablas table {border-collapse: collapse; empty-cells:show; position: absolute; top: 0px; left: 0px; table-layout: fixed;}	
 #tablas table.actual {z-index: 100;}
 #tablas table tr {}
-#tablas table tr td {border: 1px dotted #777; background: #fff; cursor: pointer; background-position: 0px 0px; background-size: cover;}
+#tablas table tr:first-child td {}
+#tablas table tr td { border: 1px dotted #777; background: #fff; cursor: pointer; background-position: 0px 0px; padding: 0px; margin: 0px;}
 
-
-#herramientas {width: 600px; height: 300px; overflow: hidden; z-index: 100002 !important;}
+#herramientas {width: 600px; height: 300px; overflow: hidden; z-index: 5000 !important;}
 
 #herramientas #herramientas_generales {position: absolute; width: 580px; left: -570px; border-right: 5px dashed #000; transition: all 0.3s; background-color: #ccc; border-radius: 0px 10px 10px 0px; z-index: 2;}
 #herramientas #herramientas_generales:hover {left: 0px;}

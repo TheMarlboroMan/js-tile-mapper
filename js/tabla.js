@@ -27,7 +27,7 @@ Tabla.prototype.crear_DOM=function()
 	{
 		event=event ? event : window.event;
 		var celda=event.target;
-		CI.click_celda(event, celda);		
+		CI.click_celda(event, celda);
 	}
 	this.DOM_tabla.onmouseover=function(event)
 	{
@@ -44,7 +44,6 @@ Tabla.prototype.crear_DOM=function()
 
 	
 	this.DOM_rep_listado=document.createElement('li');
-
 	var aquello=this;
 	this.DOM_rep_listado.onclick=function() {CT.seleccionar_tabla(aquello);}
 }
@@ -117,8 +116,7 @@ Tabla.prototype.recrear=function()
 
 Tabla.prototype.escoger_set=function(set)
 {
-	if(set)
-	{
+	if(set) {
 		this.dim_celda=set.obtener_dim_celda();
 		this.reajustar_dimensiones_tabla();
 		this.titulo_set=set.titulo;
@@ -126,10 +124,24 @@ Tabla.prototype.escoger_set=function(set)
 	}
 }
 
-Tabla.prototype.reajustar_dimensiones_tabla=function()
-{
+Tabla.prototype.reajustar_dimensiones_tabla=function() {
 	this.DOM_tabla.style.width=(this.dim_celda * this.W)+'px';
 }
+
+Tabla.prototype.reajustar_tamano_celdas=function(w, h) {
+
+	this.DOM_tabla.querySelectorAll('tr').forEach( function(_item) {
+		_item.style.height=h+'px';
+	});
+
+	this.DOM_tabla.querySelectorAll('td').forEach( function(_item) {
+		_item.style.minWidth=w+'px';
+		_item.style.maxWidth=w+'px';
+		_item.style.width=w+'px';
+		_item.width=w+'px';
+	});
+}
+
 
 Tabla.prototype.cambiar_opacidad=function(val) 
 {
@@ -157,19 +169,7 @@ Tabla.prototype.redimensionar=function(w, h)
 	this.recrear();
 }
 
-Tabla.prototype.reajustar_tamano_celdas=function(w, h) {
-
-	this.DOM_tabla.querySelectorAll('tr').forEach( function(_item) {
-		_item.style.height=h+'px';
-	});
-
-	this.DOM_tabla.querySelectorAll('td').forEach( function(_item) {
-		_item.style.minWidth=w+'px';
-	});
-}
-
-Tabla.prototype.importar=function(texto)
-{	
+Tabla.prototype.importar=function(texto) {	
 	var filas=texto.split("\n");
 	var total=filas.length;
 
@@ -189,6 +189,23 @@ Tabla.prototype.importar=function(texto)
 	}
 	this.importar_linea_estado(cadena_final);
 //	}
+}
+
+Tabla.prototype.importar_json=function(config, datos) {
+
+	this.importar_linea_configuracion_json(config);
+	var aquello=this;
+	datos.forEach(function(_item) {
+		var x=0;
+		var y=0;
+		var set=CS.obtener_set_por_titulo(this.titulo_set);
+		var c=aquello.obtener_celda_coordenadas(_item.x, _item.y);
+		if(c) {
+			var pt=_item.t;
+			if(set) pt=set.traducir_inversa(pt);
+			H.establecer_clase_celda_manual(c, pt);
+		}
+	});
 }
 
 Tabla.prototype.importar_linea_estado=function(linea)
@@ -236,6 +253,17 @@ Tabla.prototype.obtener_info_configuracion_de_linea=function(linea)
 	return resultado;
 }
 
+Tabla.prototype.obtener_info_configuracion_de_json=function(datos) {
+	var resultado=new Info_config_linea();
+	resultado.w=datos.w;
+	resultado.h=datos.h;
+	resultado.titulo_set=datos.set;
+	resultado.orden=datos.orden;
+	resultado.opacidad=datos.opacidad;
+
+	return resultado;
+}
+
 Tabla.prototype.importar_linea_configuracion=function(linea)
 {
 	var config=this.obtener_info_configuracion_de_linea(linea);
@@ -246,8 +274,15 @@ Tabla.prototype.importar_linea_configuracion=function(linea)
 	H.establecer_wh(config.w, config.h);
 }
 
-Tabla.prototype.exportar=function()
-{
+Tabla.prototype.importar_linea_configuracion_json=function(config) {
+	var set=CS.obtener_set_por_titulo(config.titulo_set);
+	if(set) this.escoger_set(set);
+	this.cambiar_opacidad(config.opacidad);
+	this.redimensionar(config.w, config.h);
+	H.establecer_wh(config.w, config.h);
+}
+
+Tabla.prototype.exportar=function() {
 	var texto=this.W+' '+this.H+' '+this.titulo_set+' '+this.orden+' '+this.opacidad+"\n";
 	var filas=this.DOM_tabla.rows;
 	var i=0;
@@ -279,4 +314,39 @@ Tabla.prototype.exportar=function()
 	texto+="\n";
 	
 	return texto;
+}
+
+Tabla.prototype.exportar_json=function() {
+
+	var resultado={'w': this.W,
+		'h' : this.H,
+		'set' : this.titulo_set,
+		'orden' : this.orden,
+		'opacidad' : this.opacidad,
+		'celdas' : [],
+	};
+
+	var filas=this.DOM_tabla.rows;
+	var i=0;
+	var lf=filas.length;
+
+	var set=CS.obtener_set_por_titulo(this.titulo_set);
+
+	while(i < lf) {
+		var fila=filas[i++];
+		var celdas=fila.querySelectorAll('td');
+		var lc=celdas.length;
+
+		var j=0;
+
+		while(j < lc) {
+			var clase=celdas[j++].className;
+			var num=clase.replace('tipo_', '');
+			if(set) num=set.traducir(num);
+
+			resultado.celdas.push({'x': j, 'y': i, 't':num});
+		}
+	}
+
+	return resultado;
 }

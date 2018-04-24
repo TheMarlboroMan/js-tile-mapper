@@ -81,6 +81,7 @@ Controlador_tablas.prototype.nueva_tabla=function()
 	var T=new Tabla(ancho, alto, orden);
 	T.iniciar();
 	T.escoger_set(CS.obtener_set_por_indice(0));
+	
 	this.insertar_tabla(T);
 	this.seleccionar_tabla(T);
 }
@@ -109,16 +110,14 @@ Controlador_tablas.prototype.reajustar_tamano_celdas=function(w, h) {
 	}
 }
 
-Controlador_tablas.prototype.generar_texto_exportacion_tablas=function()
-{
+Controlador_tablas.prototype.generar_texto_exportacion_tablas=function() {
 	var total=this.obtener_total_tablas();
 	var AT=this.obtener_array_tablas();
 	var i=0;
 
 	var resultado=total+"\n";
 	
-	while(i < total)
-	{
+	while(i < total) {
 		resultado+=AT[i].exportar();
 		++i;
 	}
@@ -126,8 +125,25 @@ Controlador_tablas.prototype.generar_texto_exportacion_tablas=function()
 	return resultado;
 }
 
-Controlador_tablas.prototype.importar=function(texto)
-{
+Controlador_tablas.prototype.generar_json_exportacion_tablas=function() {
+	var total=this.obtener_total_tablas();
+	var AT=this.obtener_array_tablas();
+	var i=0;
+
+	var resultado={
+		'total' : total,
+		'tablas' : [],
+	};
+	
+	while(i < total) {
+		resultado.tablas.push(AT[i].exportar_json());
+		++i;
+	}
+
+	return JSON.stringify(resultado);
+}
+
+Controlador_tablas.prototype.importar=function(texto) {
 	//Eliminar todas las tablas...
 	this.destruir_todas_las_tablas();
 
@@ -158,6 +174,23 @@ Controlador_tablas.prototype.importar=function(texto)
 		this.nueva_tabla();
 		this.obtener_tabla_actual().importar(t);
 	}
+}
+
+Controlador_tablas.prototype.importar_json=function(texto) {
+
+	//Eliminar todas las tablas...
+	this.destruir_todas_las_tablas();
+
+	var datos=JSON.parse(texto);
+
+	var total=datos.total;
+	var aquello=this;
+
+	datos.tablas.forEach(function(_item) {
+		var config=Tabla.prototype.obtener_info_configuracion_de_json(_item);
+		aquello.nueva_tabla();
+		aquello.obtener_tabla_actual().importar_json(config, _item.celdas);
+	});
 }
 
 Controlador_tablas.prototype.iniciar=function()
