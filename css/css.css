@@ -9,7 +9,7 @@ body {background: #f0f0f0; font-family: monospace;}
 #tablas table {border-collapse: collapse; empty-cells:show; position: absolute; top: 0px; left: 0px;}
 #tablas table.actual {z-index: 100;}
 #tablas table tr {}
-#tablas table tr td {border: 1px dotted #777; background: #fff; cursor: pointer; background-position: 0px 0px;}
+#tablas table tr td {border: 1px dotted #777; background: #fff; cursor: pointer; background-position: 0px 0px; background-size: cover;}
 
 
 #herramientas {width: 600px; height: 300px; overflow: hidden; z-index: 100002 !important;}

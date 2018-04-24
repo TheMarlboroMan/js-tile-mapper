@@ -338,9 +338,11 @@ function Herramientas_tabla()
 		var w=parseInt(aquello.input_grid_w.value, 10);
 		var h=parseInt(aquello.input_grid_h.value, 10);
 
-		var txt="#tablas table tr:nth-child("+h+"n+1) {border-top: 1px solid #55A;}\n";
-		txt+="#tablas table tr td:nth-child("+w+"n+1) {border-left: 1px solid #55A;}";
-		document.getElementById('estilos_inline_rejilla').innerHTML=txt;
+//		var txt="#tablas table tr:nth-child("+h+"n+1) {border-top: 1px solid #55A;}\n";
+//		txt+="#tablas table tr td:nth-child("+w+"n+1) {border-left: 1px solid #55A;}";
+//		document.getElementById('estilos_inline_rejilla').innerHTML=txt;
+		CT.reajustar_tamano_celdas(w, h);
+
 	}
 	this.btn_redimensionar.onclick=function() {CT.redimensionar_tablas(aquello.obtener_w(), aquello.obtener_h());}
 	this.btn_exportar.onclick=function() 
@@ -595,6 +597,17 @@ Tabla.prototype.redimensionar=function(w, h)
 	this.recrear();
 }
 
+Tabla.prototype.reajustar_tamano_celdas=function(w, h) {
+
+	this.DOM_tabla.querySelectorAll('tr').forEach( function(_item) {
+		_item.style.height=h+'px';
+	});
+
+	this.DOM_tabla.querySelectorAll('td').forEach( function(_item) {
+		_item.style.minWidth=w+'px';
+	});
+}
+
 Tabla.prototype.importar=function(texto)
 {	
 	var filas=texto.split("\n");
@@ -809,6 +822,16 @@ Controlador_tablas.prototype.redimensionar_tablas=function(w, h)
 	var i=0;
 
 	while(i < total) AT[i++].redimensionar(w, h);
+}
+
+Controlador_tablas.prototype.reajustar_tamano_celdas=function(w, h) {
+	var total=this.obtener_total_tablas();
+	var AT=this.obtener_array_tablas();
+	var i=0;
+
+	while(i < total) {
+		AT[i++].reajustar_tamano_celdas(w, h);
+	}
 }
 
 Controlador_tablas.prototype.generar_texto_exportacion_tablas=function()
