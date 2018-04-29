@@ -57,8 +57,8 @@ body {background: #f0f0f0; font-family: monospace;}
 #caja_exportar label,
 #caja_importar label {display: block;}
 
+#caja_nuevo_set #btn_cerrar_nuevo_set,
 #caja_exportar #btn_cerrar_exportar,
-#caja_exportar #btn_cerrar_nuevo_set,
 #caja_importar #btn_cerrar_importar {position: absolute; top: 10px; right: 10px;}
 
 #caja_exportar textarea {width: 90%; height: 80%; margin: 10px auto; background: #000; color: #fff; font-family: monospace; overflow-y: scroll;}

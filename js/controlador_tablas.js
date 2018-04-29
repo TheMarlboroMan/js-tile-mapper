@@ -61,9 +61,8 @@ Controlador_tablas.prototype.nueva_tabla=function() {
 
 	var ancho=H.obtener_w();
 	var alto=H.obtener_h();
-	var orden=this.obtener_total_tablas() * 10;
 
-	var T=new Tabla(ancho, alto, orden);
+	var T=new Tabla(ancho, alto);
 	T.iniciar();
 	T.escoger_set(CS.obtener_set_por_indice(0));
 	

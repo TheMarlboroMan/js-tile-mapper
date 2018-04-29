@@ -1,10 +1,9 @@
-function Tabla(w, h, orden) {
+function Tabla(w, h) {
 	this.DOM_tabla=null;
 	this.DOM_rep_listado=null;
 	this.W=w;
 	this.H=h;
 	this.css_set='';
-	this.orden=orden;
 	this.opacidad=100;
 }
 
@@ -161,7 +160,6 @@ Tabla.prototype.exportar_json=function(_ignore_zero) {
 	var resultado={'w': this.W,
 		'h' : this.H,
 		'set' : this.css_set,
-		'orden' : this.orden,
 		'opacidad' : this.opacidad,
 		'celdas' : [],
 	};
