@@ -47,6 +47,10 @@ Controlador_sets.prototype.preparar_css=function() {
 
 Controlador_sets.prototype.recargar_selector_tiles=function(select) {
 
+	while(select.childNodes.length) {
+		select.removeChild(select.childNodes[0]);
+	};
+
 	this.ARRAY_SETS.forEach((_item, _index) => {
 		var opt=document.createElement("option");
 		opt.value=_index;

@@ -7,6 +7,7 @@ function Herramientas_tabla() {
 	this.btn_nueva_tabla=document.getElementById('btn_nueva_tabla');
 	this.btn_eliminar_tabla=document.getElementById('btn_eliminar_tabla');
 	this.input_opacidad=document.getElementById('input_opacidad');
+	this.btn_nuevo_set=document.getElementById('btn_nuevo_set');
 	this.btn_tabla_anterior=document.getElementById('btn_tabla_anterior');
 	this.btn_tabla_siguiente=document.getElementById('btn_tabla_siguiente');
 	this.btn_redimensionar=document.getElementById('btn_redimensionar');
@@ -21,13 +22,21 @@ function Herramientas_tabla() {
 		aquello.input_h.value=h;
 	}
 
+	this.btn_nuevo_set.onclick=function() {
+		C_IMP.ocultar();
+		C_EXP.ocultar();
+		C_NS.mostrar();
+	}
+
 	this.btn_redimensionar.onclick=function() {CT.redimensionar_tablas(aquello.obtener_w(), aquello.obtener_h());}
 	this.btn_exportar.onclick=function() {
 		C_IMP.ocultar();
+		C_NS.ocultar();
 		C_EXP.mostrar();
 	}
 	this.btn_importar.onclick=function() {
 		C_EXP.ocultar();
+		C_NS.ocultar();
 		C_IMP.vaciar();
 		C_IMP.mostrar();
 	}
@@ -76,14 +85,14 @@ Herramientas_tabla.prototype.cargar_valores_de_tabla=function(t) {
 }
 
 Herramientas_tabla.prototype.recargar_listado_tiles=function(indice) {
+
 	var lis=this.lista_tiles.querySelectorAll('li');
 
 	var l=lis.length;
 	var i=0;
 
 	while(i < l) lis[i++].onclick=null;
-	while(this.lista_tiles.firstChild) 
-	{
+	while(this.lista_tiles.childNodes.length) {
 		this.lista_tiles.removeChild(this.lista_tiles.firstChild);
 	}
 

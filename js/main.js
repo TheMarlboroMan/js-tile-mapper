@@ -9,6 +9,7 @@ window.onload=function() {
 	function procesar_carga() {
 		C_EXP=new Caja_exportacion();
 		C_IMP=new Caja_importacion();
+		C_NS=new Caja_nuevo_set();
 		CI=new Controlador_input();
 		H=new Herramientas_tabla();
 		H.recargar_selector_tiles();

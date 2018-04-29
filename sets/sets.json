@@ -1,41 +1,23 @@
 {
 	"sets" : [
-		{"titulo" : "Plataformas",
+		{"titulo" : "Plataformas 32x32",
 			"css" : "plataformas",
 			"src" : "sets/plataformas.png",
 			"cw":32, "ch":32
 		},
-		{"titulo" : "Control",
+		{"titulo" : "Control 32x32",
 			"css" : "control",
 			"src" : "sets/control.png",
-			"cw":16, "ch":16
-		},
-		{"titulo":"Control grande",
-			"css":"control_grande",
-			"src":"sets/control_big.png",
-			"cw":32, "ch":32
-		},
-		{"titulo":"Básico",
-			"css" : "basico",
-			"src":"sets/basico.png",
-			"cw":32, "ch":32
-		},
-		{"titulo":"Básico 2",
-			"css" : "basico2",
-			"src":"sets/basico2.png",
 			"cw":32, "ch":32
 		},
 		{"titulo":"Basico 16x16",
 			"css" : "basico16x16",
 			"src":"sets/basico_16.png",
-			"cw":16, "ch":16},
-		{"titulo":"Basico 16x16 alt",
-			"css" : "basico16x16_2",
-			"src":"sets/basico_16_2.png",
-			"cw":16, "ch":16},
-		{"titulo":"Fondo 16x16",
-			"css" : "fondo16x16",
-			"src":"sets/background_16.png",
+			"cw":16, "ch":16
+		},
+		{"titulo":"Fondo 16x16 map",
+			"css" : "fondo16x16_map",
+			"src":"sets/background-16-ordered.png",
 			"cw":16, "ch":16
 		}
 	]

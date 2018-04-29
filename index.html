@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="js/main.js"></script>
 	<script type="text/javascript" src="js/caja_exportacion.js"></script>
 	<script type="text/javascript" src="js/caja_importacion.js"></script>
+	<script type="text/javascript" src="js/caja_nuevo_set.js"></script>
 	<script type="text/javascript" src="js/controlador_tablas.js"></script>
 	<script type="text/javascript" src="js/tabla.js"></script>
 	<script type="text/javascript" src="js/herramientas_tabla.js"></script>
@@ -26,6 +27,7 @@
 			<div>
 				<input type="button" class="btn" id="btn_importar" value="Importar" />
 				<input type="button" class="btn" id="btn_exportar" value="Exportar" />
+				<input type="button" class="btn" id="btn_nuevo_set" value="Nuevo set" />
 				<input type="button" class="btn" id="btn_nueva_tabla" value="Nueva tabla" />
 				<input type="button" class="btn" id="btn_eliminar_tabla" value="Borrar" />
 				<input type="button" class="btn" id="btn_tabla_anterior" value="Anterior" />
@@ -36,13 +38,6 @@
 				<label for="redim_h">H: <input class="txt" type="text" id="redim_h" value="10" /></label>
 				<input type="button" class="btn" id="btn_redimensionar" value="Redimensionar" />
 			</div>
-<!--
-			<div>
-				<label for="grid_w">CW: <input class="txt" type="text" id="grid_w" value="16" /></label>
-				<label for="grid_h">CH: <input class="txt" type="text" id="grid_h" value="16" /></label>
-				<input type="button" class="btn" id="btn_rejilla" value="Reajustar" />
-			</div>
--->
 
 			<ul id="listado_tablas"></ul>
 		</div>
@@ -50,7 +45,6 @@
 		<div id="herramientas_tabla" class="ui_form_generico">
 			<div><label for="select_set">Set: <select id="select_set"></select></label></div>
 			<div><label for="input_opacidad">Opacidad: <input class="txt" type="text" id="input_opacidad" value="100" /></label></div>
-<!--			<div><label for="input_orden">Orden: <input class="txt" type="text" id="input_orden" value="1" /></label></div>-->
 			<ul id="listado_tiles"></ul>
 		</div>
 	</div>
@@ -68,6 +62,18 @@
 		<input class="btn" type="button" value="&times;" id="btn_cerrar_importar"/>
 		<textarea class="txt" name="texto" id="textarea_importar"></textarea>
 		<input class="btn" type="button" id="btn_importar_json" value="Importar JSON" />
+	</div>
+
+	<div id="caja_nuevo_set" class="oculto ui_form_generico pop_up">
+
+		<input type="file" id="file_nuevo_set" />
+		<label>Nombre: <input class="txt" type="text" id="input_title" value="" /></label>
+		<label>Clave: <input class="txt" type="text" id="input_style" value="" /></label>
+		<label>Celda W: <input class="txt" type="text" id="set_celda_w" value="32" /></label>
+		<label>Celda H: <input class="txt" type="text" id="set_celda_h" value="32" /></label>
+
+		<input class="btn" type="button" value="&times;" id="btn_cerrar_nuevo_set"/>
+		<input class="btn" type="button" id="btn_nuevo_set" value="Crear set" />
 	</div>
 
 	<div id="navegacion"></div>

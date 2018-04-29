@@ -29,7 +29,7 @@ body {background: #f0f0f0; font-family: monospace;}
 #herramientas #herramientas_tabla {padding-left: 20px; z-index: 1;/*position: absolute; width: 350px; right: -330px; border-left: 5px dashed #ccc; transition: all 0.3s;*/}
 /*#herramientas #herramientas_tabla:hover {right: 0px;}*/
 
-#herramientas #herramientas_tabla ul#listado_tiles {overflow: hidden; list-style: none; margin: 0px; padding: 0px; width: 100%; height: 100px; overflow-y: scroll;}
+#herramientas #herramientas_tabla ul#listado_tiles {overflow: hidden; list-style: none; margin: 0px; padding: 0px; width: 100%; height: 200px; overflow-y: scroll;}
 #herramientas #herramientas_tabla ul#listado_tiles li {float: left; margin: 2px;}
 #herramientas #herramientas_tabla ul#listado_tiles input {display: none;}
 #herramientas #herramientas_tabla ul#listado_tiles label {opacity: 0.5; cursor: pointer; display: block;}
@@ -49,13 +49,16 @@ body {background: #f0f0f0; font-family: monospace;}
 
 .pop_up {background: #EFC24A; padding: 10px; box-shadow: 2px 2px 4px rgba(0,0,0,.3); position: fixed; border-radius: 10px;}
 
+#caja_nuevo_set,
 #caja_exportar,
 #caja_importar {width: 600px; height: 400px; top: 50%; left: 50%; margin-left: -300px; margin-top: -200px; z-index: 10003;}
 
+#caja_nuevo_set label,
 #caja_exportar label,
 #caja_importar label {display: block;}
 
 #caja_exportar #btn_cerrar_exportar,
+#caja_exportar #btn_cerrar_nuevo_set,
 #caja_importar #btn_cerrar_importar {position: absolute; top: 10px; right: 10px;}
 
 #caja_exportar textarea {width: 90%; height: 80%; margin: 10px auto; background: #000; color: #fff; font-family: monospace; overflow-y: scroll;}

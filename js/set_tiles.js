@@ -15,10 +15,15 @@ Set_tiles.prototype.generar_cadena_css=function() {
 	css_herramientas+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li label {width: "+this.celda_w+"px; height: "+this.celda_h+"px; background-image: url('"+this.src+"'); }\n";
 
 	let x=0, y=0, i=0;
-	for(x=0; x<this.img_w; x+=this.celda_w) {
-		for(y=0; y<this.img_h; y+=this.celda_h) {
+	for(y=0; y<this.img_h; y+=this.celda_h) {
+		for(x=0; x<this.img_w; x+=this.celda_w) {
 
 			css_tablas+="#tablas table."+this.classname+" tr td.tipo_"+i+" {background-position: "+(-x)+"px "+(-y)+"px;}\n";
+
+			if(x==0) {
+				css_herramientas+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li:nth-child("+(i+1)+") {clear: left;}\n";
+			}
+
 			css_herramientas+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li.tipo_"+i+" label {background-position: "+(-x)+"px "+(-y)+"px;}\n";
 			i++;
 		}
