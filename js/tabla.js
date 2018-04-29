@@ -4,7 +4,7 @@ function Tabla(w, h, orden)
 	this.DOM_rep_listado=null;
 	this.W=w;
 	this.H=h;
-	this.titulo_set='';
+	this.css_set='';
 	this.dim_celda=0;
 
 //TODO: El orden debería usarse para dar también un zindex. No está comprobado que esto no de fallos.
@@ -119,8 +119,8 @@ Tabla.prototype.escoger_set=function(set)
 	if(set) {
 		this.dim_celda=set.obtener_dim_celda();
 		this.reajustar_dimensiones_tabla();
-		this.titulo_set=set.titulo;
-		this.DOM_tabla.className=this.titulo_set;
+		this.css_set=set.classname;
+		this.DOM_tabla.className=this.css_set;
 	}
 }
 
@@ -195,10 +195,8 @@ Tabla.prototype.importar_json=function(config, datos) {
 
 	this.importar_linea_configuracion_json(config);
 	var aquello=this;
-	var set=CS.obtener_set_por_titulo(this.titulo_set);
-console.log(datos);
+	var set=CS.obtener_set_por_css(this.css_set);
 	datos.forEach(function(_item) {
-console.log(_item);
 		var c=aquello.obtener_celda_coordenadas(_item.x, _item.y);
 		if(c) {
 			var pt=_item.t;
@@ -215,7 +213,7 @@ Tabla.prototype.importar_linea_estado=function(linea) {
 	var x=0;
 	var y=0;
 
-	var set=CS.obtener_set_por_titulo(this.titulo_set);
+	var set=CS.obtener_set_por_css(this.css_set);
 
 	while(i < l)
 	{
@@ -242,10 +240,11 @@ Tabla.prototype.importar_linea_estado=function(linea) {
 Tabla.prototype.obtener_info_configuracion_de_linea=function(linea)
 {
 	var val=linea.split(" ");
+	//TODO: Build in situ.
 	var resultado=new Info_config_linea();
 	resultado.w=parseInt(val[0], 10);
 	resultado.h=parseInt(val[1], 10);
-	resultado.titulo_set=val[2];
+	resultado.css_set=val[2];
 	resultado.orden=parseInt(val[3], 10);
 	resultado.opacidad=parseInt(val[4], 10);
 
@@ -256,7 +255,7 @@ Tabla.prototype.obtener_info_configuracion_de_json=function(datos) {
 	var resultado=new Info_config_linea();
 	resultado.w=datos.w;
 	resultado.h=datos.h;
-	resultado.titulo_set=datos.set;
+	resultado.css_set=datos.set;
 	resultado.orden=datos.orden;
 	resultado.opacidad=datos.opacidad;
 
@@ -266,7 +265,7 @@ Tabla.prototype.obtener_info_configuracion_de_json=function(datos) {
 Tabla.prototype.importar_linea_configuracion=function(linea)
 {
 	var config=this.obtener_info_configuracion_de_linea(linea);
-	var set=CS.obtener_set_por_titulo(config.titulo_set);
+	var set=CS.obtener_set_por_css(config.css_set);
 	if(set) this.escoger_set(set);
 	this.cambiar_opacidad(config.opacidad);
 	this.redimensionar(config.w, config.h);
@@ -274,7 +273,7 @@ Tabla.prototype.importar_linea_configuracion=function(linea)
 }
 
 Tabla.prototype.importar_linea_configuracion_json=function(config) {
-	var set=CS.obtener_set_por_titulo(config.titulo_set);
+	var set=CS.obtener_set_por_css(config.css_set);
 	if(set) this.escoger_set(set);
 	this.cambiar_opacidad(config.opacidad);
 	this.redimensionar(config.w, config.h);
@@ -282,12 +281,12 @@ Tabla.prototype.importar_linea_configuracion_json=function(config) {
 }
 
 Tabla.prototype.exportar=function() {
-	var texto=this.W+' '+this.H+' '+this.titulo_set+' '+this.orden+' '+this.opacidad+"\n";
+	var texto=this.W+' '+this.H+' '+this.css_set+' '+this.orden+' '+this.opacidad+"\n";
 	var filas=this.DOM_tabla.rows;
 	var i=0;
 	var lf=filas.length;
 
-	var set=CS.obtener_set_por_titulo(this.titulo_set);
+	var set=CS.obtener_set_por_css(this.css_set);
 
 	//La exportación se realiza en una sóla línea.
 	while(i < lf)
@@ -318,7 +317,7 @@ Tabla.prototype.exportar_json=function() {
 
 	var resultado={'w': this.W,
 		'h' : this.H,
-		'set' : this.titulo_set,
+		'set' : this.css_set,
 		'orden' : this.orden,
 		'opacidad' : this.opacidad,
 		'celdas' : [],
@@ -328,7 +327,7 @@ Tabla.prototype.exportar_json=function() {
 	var i=0;
 	var lf=filas.length;
 
-	var set=CS.obtener_set_por_titulo(this.titulo_set);
+	var set=CS.obtener_set_por_css(this.css_set);
 
 	while(i < lf) {
 		var celdas=filas[i].querySelectorAll('td');

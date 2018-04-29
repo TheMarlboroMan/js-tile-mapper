@@ -1,0 +1,30 @@
+{
+	"sets" : [
+		{"titulo" : "Plataformas",
+			"css" : "plataformas",
+			"src" : "sets/plataformas.png",
+			"trans" : " #-HMx\\|/="
+		},
+		{"titulo" : "Control",
+			"css" : "control",
+			"src" : "sets/control.png",
+			"trans" : " #=-/Z\\S{<}>7P95HMx"
+		},
+		{"titulo":"Control grande",
+			"src":"sets/control_big.png",
+			"trans":" #=-/Z\\S{<}>7P95HMx"
+		},
+		{"titulo":"Básico",
+			"css" : "basico",
+			"src":"sets/basico.png"},
+		{"titulo":"Básico 2",
+			"css" : "basico2",
+			"src":"sets/basico2.png"},
+		{"titulo":"Basico 16x16",
+			"css" : "basico16x16",
+			"src":"sets/basico_16.png"},
+		{"titulo":"Fondo 16x16",
+			"css" : "fondo16x16",
+			"src":"sets/background_16.png"}
+	]
+}
