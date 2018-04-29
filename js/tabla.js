@@ -60,53 +60,41 @@ Tabla.prototype.adjuntar=function()
 	document.getElementById('listado_tablas').appendChild(this.DOM_rep_listado);
 }
 
-Tabla.prototype.obtener_celda_coordenadas=function(x, y)
-{
+Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
 	var row=this.DOM_tabla.rows[y];
-	if(!row)
-	{
+	if(!row) {
 		return null;
 	}
-	else
-	{
+	else {
 		var celda=row.cells[x];
 		if(!celda) return null;
 		else return celda;
 	}
 }
 
-Tabla.prototype.recrear=function()
-{
+Tabla.prototype.recrear=function() {
 
 	var tr=this.DOM_tabla.rows.length;
 	var i=0;
-	while(i < tr)
-	{
+	while(i < tr) {
 		this.DOM_tabla.deleteRow(0);
 		++i;
 	}
 
 	var y=0, x=0;
 
-//	function click_celda(celda)
-//	{
-//		celda.onclick=function(event) {CI.click_celda(event, celda);}
-//	}
-
-	while(y < this.H)
-	{
+	while(y < this.H) {
 		x=0
 		var row=this.DOM_tabla.insertRow();
 
 		while(x < this.W)
 		{
 			var celda=row.insertCell(-1);
-//			click_celda(celda);	
 			celda.className='tipo_0';
 			celda.setAttribute('data-x', x);
 			celda.setAttribute('data-y', y);
 			++x;
-		}		
+		}
 		
 		++y;
 	}
@@ -169,26 +157,18 @@ Tabla.prototype.redimensionar=function(w, h)
 	this.recrear();
 }
 
-Tabla.prototype.importar=function(texto) {	
+Tabla.prototype.importar=function(texto) {
 	var filas=texto.split("\n");
 	var total=filas.length;
 
 	this.importar_linea_configuracion(filas[0]);
 
-//	if(total==2)
-//	{
-//		this.importar_linea_estado(filas[1]);
-//	}
-//	else
-//	{
 	var i=1;
 	var cadena_final='';
-	while(i < total) 
-	{
+	while(i < total) {
 		cadena_final+=(filas[i++]+"\n");
 	}
 	this.importar_linea_estado(cadena_final);
-//	}
 }
 
 Tabla.prototype.importar_json=function(config, datos) {
@@ -240,26 +220,14 @@ Tabla.prototype.importar_linea_estado=function(linea) {
 Tabla.prototype.obtener_info_configuracion_de_linea=function(linea)
 {
 	var val=linea.split(" ");
-	//TODO: Build in situ.
-	var resultado=new Info_config_linea();
-	resultado.w=parseInt(val[0], 10);
-	resultado.h=parseInt(val[1], 10);
-	resultado.css_set=val[2];
-	resultado.orden=parseInt(val[3], 10);
-	resultado.opacidad=parseInt(val[4], 10);
-
-	return resultado;
+	//w, h, css classname, order and opacity...
+	return new Info_config_linea(
+		parseInt(val[0], 10), parseInt(val[1], 10), val[2], parseInt(val[3], 10), parseInt(val[4], 10));
 }
 
 Tabla.prototype.obtener_info_configuracion_de_json=function(datos) {
-	var resultado=new Info_config_linea();
-	resultado.w=datos.w;
-	resultado.h=datos.h;
-	resultado.css_set=datos.set;
-	resultado.orden=datos.orden;
-	resultado.opacidad=datos.opacidad;
 
-	return resultado;
+	return new Info_config_linea(datos.w, datos.h, datos.set, datos.orden, datos.opacidad);
 }
 
 Tabla.prototype.importar_linea_configuracion=function(linea)
@@ -297,8 +265,7 @@ Tabla.prototype.exportar=function() {
 
 		var j=0;
 
-		while(j < lc)
-		{
+		while(j < lc) {
 			var clase=celdas[j++].className;
 			var num=clase.replace('tipo_', '');
 			if(set) num=set.traducir(num);

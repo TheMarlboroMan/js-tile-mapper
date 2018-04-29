@@ -2,11 +2,11 @@ function Controlador_tablas()
 {
 	var TABLA_ACTUAL=null;
 	var TABLAS=Array();
-	var aquello=this;
 
-	this.insertar_tabla=function(t){TABLAS.push(t);}
-	this.seleccionar_tabla=function(t) 
-	{
+	//All these functions are here so we can access the private variables above.
+
+	this.insertar_tabla=(t) => {TABLAS.push(t);}
+	this.seleccionar_tabla=(t) => {
 		if(TABLA_ACTUAL) TABLA_ACTUAL.quitar_actual();
 		TABLA_ACTUAL=t;
 		TABLA_ACTUAL.escoger_actual();
@@ -18,9 +18,8 @@ function Controlador_tablas()
 	this.obtener_array_tablas=function() {return TABLAS;}
 	this.obtener_total_tablas=function() {return TABLAS.length;}
 
-	this.eliminar_tabla_actual=function() 
-	{
-		if(aquello.obtener_total_tablas() > 1)
+	this.eliminar_tabla_actual=() => {
+		if(this.obtener_total_tablas() > 1)
 		{
 			var indice=TABLAS.indexOf(TABLA_ACTUAL);
 			if(indice==TABLAS.length-1) return;
@@ -29,51 +28,36 @@ function Controlador_tablas()
 				TABLAS[indice].destruir();
 				delete TABLAS[indice];
 				TABLAS.splice(indice, 1);
-				aquello.seleccionar_tabla(TABLAS[0]);
+				this.seleccionar_tabla(TABLAS[0]);
 			}
 		}
 	}
 
-	this.destruir_todas_las_tablas=function() 
-	{
-		var l=TABLAS.length;
-		var i=0;
+	this.destruir_todas_las_tablas=() => {
 
-		while(i < l)
-		{
-			TABLAS[i].destruir();
-			delete TABLAS[i];			
-			++i;
-		}
-
+		TABLAS.forEach((_item) => {_item.destruir();});
 		TABLAS.length=0;
 		TABLA_ACTUAL=null;
 	}
 
-	this.tabla_siguiente=function()
-	{
+	this.tabla_siguiente=() => {
 		var indice=TABLAS.indexOf(TABLA_ACTUAL);
 		if(indice==TABLAS.length-1 || indice==-1) return;
-		else aquello.seleccionar_tabla(TABLAS[indice+1]);
+		else this.seleccionar_tabla(TABLAS[indice+1]);
 	}
 
-	this.tabla_anterior=function()
-	{
+	this.tabla_anterior=() => {
 		var indice=TABLAS.indexOf(TABLA_ACTUAL);
 		if(indice==0 || indice==-1) return;
-		else aquello.seleccionar_tabla(TABLAS[indice-1]);
+		else this.seleccionar_tabla(TABLAS[indice-1]);
 	}
-
 }
 
-Controlador_tablas.prototype.obtener_celda_coordenadas=function(x, y)
-{
-	var TABLA_ACTUAL=this.obtener_tabla_actual();
-	return TABLA_ACTUAL.obtener_celda_coordenadas(x, y);
+Controlador_tablas.prototype.obtener_celda_coordenadas=function(x, y) {
+	return this.obtener_tabla_actual().obtener_celda_coordenadas(x, y);
 }
 
-Controlador_tablas.prototype.nueva_tabla=function()
-{
+Controlador_tablas.prototype.nueva_tabla=function() {
 	var ancho=H.obtener_w();
 	var alto=H.obtener_h();
 	var orden=this.obtener_total_tablas() * 10;
@@ -86,64 +70,45 @@ Controlador_tablas.prototype.nueva_tabla=function()
 	this.seleccionar_tabla(T);
 }
 
-Controlador_tablas.prototype.cambiar_opacidad_tabla_actual=function(val)
-{
+Controlador_tablas.prototype.cambiar_opacidad_tabla_actual=function(val) {
 	this.obtener_tabla_actual().cambiar_opacidad(val);
 }
 
-Controlador_tablas.prototype.redimensionar_tablas=function(w, h)
-{
-	var total=this.obtener_total_tablas();
-	var AT=this.obtener_array_tablas();
-	var i=0;
-
-	while(i < total) AT[i++].redimensionar(w, h);
+Controlador_tablas.prototype.redimensionar_tablas=function(w, h) {
+	this.obtener_array_tablas().forEach((_item) => {
+		_item.redimensionar(w, h);
+	});
 }
 
 Controlador_tablas.prototype.reajustar_tamano_celdas=function(w, h) {
-	var total=this.obtener_total_tablas();
-	var AT=this.obtener_array_tablas();
-	var i=0;
-
-	while(i < total) {
-		AT[i++].reajustar_tamano_celdas(w, h);
-	}
+	var AT=this.obtener_array_tablas().forEach( (_item) => {
+		_item.reajustar_tamano_celdas(w, h);
+	});
 }
 
 Controlador_tablas.prototype.generar_texto_exportacion_tablas=function() {
-	var total=this.obtener_total_tablas();
-	var AT=this.obtener_array_tablas();
-	var i=0;
-
-	var resultado=total+"\n";
 	
-	while(i < total) {
-		resultado+=AT[i].exportar();
-		++i;
-	}
-
-	return resultado;
+	return this.obtener_total_tablas()+"\n"+this.obtener_array_tablas().reduce( (_acc, _item) => {
+		return _acc+_item.exportar();
+	}, '');
 }
 
 Controlador_tablas.prototype.generar_json_exportacion_tablas=function() {
-	var total=this.obtener_total_tablas();
-	var AT=this.obtener_array_tablas();
-	var i=0;
 
 	var resultado={
 		'total' : total,
 		'tablas' : [],
 	};
-	
-	while(i < total) {
-		resultado.tablas.push(AT[i].exportar_json());
-		++i;
-	}
+
+	this.obtener_array_tablas().forEach((_item) => {
+		resultado.tablas.push(_item.exportar_json());
+	});	
 
 	return JSON.stringify(resultado);
 }
 
 Controlador_tablas.prototype.importar=function(texto) {
+
 	//Eliminar todas las tablas...
 	this.destruir_todas_las_tablas();
 

@@ -2,9 +2,7 @@
 
 JS tile mapper. A very simple distraction dated from long ago.
 
-The code is done in an old JS style, with lots of global state scattered throughout. 
-
-I feel it could benefit from some refactoring and documenting but in order to do that I would have to dive into it again, which I don't feel like doing (that fact alone speaks a lot about the overall quality of the code).
+The code is done in an old JS style, with lots of global state scattered throughout. A refactor was started in late April, 2018, but I don't think it will end removing global state.
 
 # TODO: 
 
@@ -15,6 +13,13 @@ Even if I don't feel like diving in, I could get away with this:
 	- Add an optional translation for each cell (cells are square, width is assumed to be same as height).
 - Do it ECMA6 style.
 	- We could get rid of a lot of var aquello=this;.
+- Add custom language strings.
+- Add optional data to the maps.
+- Remove the exporting / importing as plain text. It is ugly.
+
+# DONE 
+
+- Remove the old XML loading style.
 
 # Credits:
 

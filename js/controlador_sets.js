@@ -13,6 +13,10 @@ Controlador_sets.prototype.iniciar=function(callback) {
 	.then((_res) => {return this.procesar_carga(_res);});
 }
 
+Controlador_sets.prototype.insertar_set=function(_w, _h, _titulo, _traduccion, _src, _css) {
+	this.ARRAY_SETS.push(new Set_tiles(_w, _h, _titulo, _traduccion, _src, _css));
+}
+
 Controlador_sets.prototype.procesar_carga=function(_json) {
 
 	let total=_json.sets.length;
@@ -20,7 +24,7 @@ Controlador_sets.prototype.procesar_carga=function(_json) {
 
 	let loadcb=(_img, _titulo, _traduccion, _src, _css) => {
 
-		this.ARRAY_SETS.push(new Set_tiles(_img.width, _img.height, _titulo, _traduccion, _src, _css));
+		this.insertar_set(_img.width, _img.height, _titulo, _traduccion, _src, _css);
 		if(++cargados==total) {
 			this.preparar_css();
 			if(this.callback) this.callback();
@@ -39,35 +43,28 @@ Controlador_sets.prototype.procesar_carga=function(_json) {
 }
 
 Controlador_sets.prototype.preparar_css=function() {
-	let css=this.ARRAY_SETS.reduce((_acc, _item) => {
-			return _acc+_item.generar_cadena_css();
+	document.getElementById('estilos_inline').innerHTML=this.ARRAY_SETS.reduce((_acc, _item) => {
+		return _acc+_item.generar_cadena_css();
 	}, '');
-	document.getElementById('estilos_inline').innerHTML=css;
-	console.log(css);
-
 }
 
 Controlador_sets.prototype.recargar_selector_tiles=function(select) {
-	var i=0;
-	var l=this.ARRAY_SETS.length;
 
-	while(i < l) {
+	this.ARRAY_SETS.forEach((_item, _index) => {
 		var opt=document.createElement("option");
-		opt.value=i;
-		opt.text=this.ARRAY_SETS[i].titulo;
+		opt.value=_index;
+		opt.text=_item.titulo;
 		select.add(opt, null);
-		++i;
-	}
+	});
 }
 
 Controlador_sets.prototype.obtener_set_por_css=function(t) {
-	var l=this.ARRAY_SETS.length;
-	var i=0;
 
-	while(i < l) {
+	let i=0;
+	while(i=0 < this.ARRAY_SETS.length) {
 		if(this.ARRAY_SETS[i].classname==t) return this.ARRAY_SETS[i];
 		++i;
-	}
+	};
 
 	return null;
 }
