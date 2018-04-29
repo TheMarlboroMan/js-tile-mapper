@@ -1,5 +1,4 @@
-function Herramientas_tabla()
-{
+function Herramientas_tabla() {
 	this.DOM_contenedor=document.getElementById('herramientas');
 	this.input_w=document.getElementById('redim_w');
 	this.input_h=document.getElementById('redim_h');
@@ -25,13 +24,8 @@ function Herramientas_tabla()
 		aquello.input_h.value=h;
 	}
 
-//	this.btn_rejilla.onclick=function() {
-//		CT.reajustar_tamano_celdas(aquello.obtener_w_celda(), aquello.obtener_h_celda());
-//	}
-
 	this.btn_redimensionar.onclick=function() {CT.redimensionar_tablas(aquello.obtener_w(), aquello.obtener_h());}
-	this.btn_exportar.onclick=function() 
-	{
+	this.btn_exportar.onclick=function() {
 		C_IMP.ocultar();
 		C_EXP.mostrar();
 	}
@@ -61,37 +55,30 @@ function Herramientas_tabla()
 	this.establecer_tipo_actual=function(v) {tipo_actual=v;}
 }
 
-Herramientas_tabla.prototype.intercambiar=function(event)
-{
+Herramientas_tabla.prototype.intercambiar=function(event) {
 	if(this.DOM_contenedor.classList.contains('oculto')) this.mostrar(event);
 	else this.ocultar(event);
 }
 
-Herramientas_tabla.prototype.mostrar=function(event)
-{
+Herramientas_tabla.prototype.mostrar=function(event) {
 	this.DOM_contenedor.classList.remove('oculto');
-	this.DOM_contenedor.style.left=event.clientX - (this.DOM_contenedor.offsetWidth / 2)+'px';	
+	this.DOM_contenedor.style.left=event.clientX - (this.DOM_contenedor.offsetWidth / 2)+'px';
 	this.DOM_contenedor.style.top=event.clientY - (this.DOM_contenedor.offsetHeight / 2)+'px';
 }
 
 Herramientas_tabla.prototype.ocultar=function(){this.DOM_contenedor.classList.add('oculto');}
 Herramientas_tabla.prototype.obtener_w=function(){return parseInt(this.input_w.value, 10);}
 Herramientas_tabla.prototype.obtener_h=function(){return parseInt(this.input_h.value, 10);}
-//Herramientas_tabla.prototype.obtener_w_celda=function(){return parseInt(this.input_grid_w.value, 10);}
-//Herramientas_tabla.prototype.obtener_h_celda=function(){return parseInt(this.input_grid_h.value, 10);}
-
 Herramientas_tabla.prototype.establecer_clase_celda=function(c){c.className='tipo_'+this.obtener_tipo_actual();}
 Herramientas_tabla.prototype.establecer_clase_celda_manual=function(c, t){c.className='tipo_'+t;}
 Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_selector_tiles(this.select_set);}
 
-Herramientas_tabla.prototype.cargar_valores_de_tabla=function(t)
-{
+Herramientas_tabla.prototype.cargar_valores_de_tabla=function(t) {
 	this.input_opacidad.value=t.opacidad;
 	this.select_set.value=t.titulo_set;
 }
 
-Herramientas_tabla.prototype.recargar_listado_tiles=function(indice)
-{
+Herramientas_tabla.prototype.recargar_listado_tiles=function(indice) {
 	var lis=this.lista_tiles.querySelectorAll('li');
 
 	var l=lis.length;
@@ -107,10 +94,7 @@ Herramientas_tabla.prototype.recargar_listado_tiles=function(indice)
 	if(s) s.rellenar_selector(this.lista_tiles);
 }
 
-Herramientas_tabla.prototype.importar=function(texto) {
-	CT.importar(texto);
-}
-
+//TODO: Is this ever used???
 Herramientas_tabla.prototype.importar_json=function(datos) {
 	CT.importar_json(datos);
 }

@@ -58,6 +58,7 @@ Controlador_tablas.prototype.obtener_celda_coordenadas=function(x, y) {
 }
 
 Controlador_tablas.prototype.nueva_tabla=function() {
+
 	var ancho=H.obtener_w();
 	var alto=H.obtener_h();
 	var orden=this.obtener_total_tablas() * 10;
@@ -81,64 +82,23 @@ Controlador_tablas.prototype.redimensionar_tablas=function(w, h) {
 }
 
 Controlador_tablas.prototype.reajustar_tamano_celdas=function(w, h) {
-	var AT=this.obtener_array_tablas().forEach( (_item) => {
+	this.obtener_array_tablas().forEach( (_item) => {
 		_item.reajustar_tamano_celdas(w, h);
 	});
 }
 
-Controlador_tablas.prototype.generar_texto_exportacion_tablas=function() {
-	
-	return this.obtener_total_tablas()+"\n"+this.obtener_array_tablas().reduce( (_acc, _item) => {
-		return _acc+_item.exportar();
-	}, '');
-}
-
-Controlador_tablas.prototype.generar_json_exportacion_tablas=function() {
+Controlador_tablas.prototype.generar_json_exportacion_tablas=function(_ignore_zero) {
 
 	var resultado={
-		'total' : total,
+		'total' : this.obtener_total_tablas(),
 		'tablas' : [],
 	};
 
 	this.obtener_array_tablas().forEach((_item) => {
-		resultado.tablas.push(_item.exportar_json());
+		resultado.tablas.push(_item.exportar_json(_ignore_zero));
 	});	
 
 	return JSON.stringify(resultado);
-}
-
-Controlador_tablas.prototype.importar=function(texto) {
-
-	//Eliminar todas las tablas...
-	this.destruir_todas_las_tablas();
-
-	//Leer la primera línea para crear la tabla...
-	var lineas=texto.split("\n");
-
-	var total=parseInt(lineas[0], 10);
-	var cl=lineas.length;
-	var i=1;
-
-	while(i < cl)
-	{
-		var linea_config=lineas[i++];
-		var config=Tabla.prototype.obtener_info_configuracion_de_linea(linea_config);
-		var t=linea_config+"\n";
-		var j=0;
-
-		//Realmente el código de importación hace que esto no importe, creo...
-//		var separador=C_IMP.es_importar_una_linea() ? '' : '\n';
-		var separador='\n';
-
-		while(j < config.h)
-		{
-			t+=lineas[i++]+separador;
-			++j;
-		}
-	
-		this.nueva_tabla();
-		this.obtener_tabla_actual().importar(t);
-	}
 }
 
 Controlador_tablas.prototype.importar_json=function(texto) {
@@ -152,14 +112,12 @@ Controlador_tablas.prototype.importar_json=function(texto) {
 	var aquello=this;
 
 	datos.tablas.forEach(function(_item) {
-		var config=Tabla.prototype.obtener_info_configuracion_de_json(_item);
 		aquello.nueva_tabla();
-		aquello.obtener_tabla_actual().importar_json(config, _item.celdas);
+		aquello.obtener_tabla_actual().importar_json(_item);
 	});
 }
 
-Controlador_tablas.prototype.iniciar=function()
-{
+Controlador_tablas.prototype.iniciar=function() {
 	this.nueva_tabla();
 	this.escoger_primera_tabla();
 }

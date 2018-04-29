@@ -1,5 +1,4 @@
-function Tabla(w, h, orden)
-{
+function Tabla(w, h, orden) {
 	this.DOM_tabla=null;
 	this.DOM_rep_listado=null;
 	this.W=w;
@@ -13,24 +12,24 @@ function Tabla(w, h, orden)
 	this.opacidad=100;
 }
 
-Tabla.prototype.iniciar=function()
-{
+Tabla.prototype.iniciar=function() {
 	this.crear_DOM();
 	this.adjuntar();
 	this.recrear();
 }
 
-Tabla.prototype.crear_DOM=function()
+Tabla.prototype.crear_DOM=function() 
 {
 	this.DOM_tabla=document.createElement('table');
-	this.DOM_tabla.onclick=function(event)
-	{
+
+	//TODO: Use addEventHandler...
+	this.DOM_tabla.onclick=function(event) 	{
 		event=event ? event : window.event;
 		var celda=event.target;
 		CI.click_celda(event, celda);
 	}
-	this.DOM_tabla.onmouseover=function(event)
-	{
+	//TODO: Use addEventHandler...
+	this.DOM_tabla.onmouseover=function(event) {
 		event=event ? event : window.event;
 		var celda=event.target;
 
@@ -42,25 +41,23 @@ Tabla.prototype.crear_DOM=function()
 		}
 	}
 
-	
 	this.DOM_rep_listado=document.createElement('li');
-	var aquello=this;
-	this.DOM_rep_listado.onclick=function() {CT.seleccionar_tabla(aquello);}
+	this.DOM_rep_listado.onclick=() => {CT.seleccionar_tabla(this);}
 }
 
-Tabla.prototype.destruir=function()
-{
+Tabla.prototype.destruir=function() {
+	//TODO: Erase handlers!!!
 	this.DOM_tabla.parentNode.removeChild(this.DOM_tabla);
 	this.DOM_rep_listado.parentNode.removeChild(this.DOM_rep_listado);
 }
 
-Tabla.prototype.adjuntar=function()
-{
+Tabla.prototype.adjuntar=function() {
 	document.getElementById('tablas').appendChild(this.DOM_tabla);
 	document.getElementById('listado_tablas').appendChild(this.DOM_rep_listado);
 }
 
 Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
+
 	var row=this.DOM_tabla.rows[y];
 	if(!row) {
 		return null;
@@ -74,11 +71,9 @@ Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
 
 Tabla.prototype.recrear=function() {
 
-	var tr=this.DOM_tabla.rows.length;
-	var i=0;
-	while(i < tr) {
+	//TODO: I guess I could just do it the easy way.
+	while(this.DOM_tabla.rows.length) {
 		this.DOM_tabla.deleteRow(0);
-		++i;
 	}
 
 	var y=0, x=0;
@@ -87,8 +82,7 @@ Tabla.prototype.recrear=function() {
 		x=0
 		var row=this.DOM_tabla.insertRow();
 
-		while(x < this.W)
-		{
+		while(x < this.W) {
 			var celda=row.insertCell(-1);
 			celda.className='tipo_0';
 			celda.setAttribute('data-x', x);
@@ -131,53 +125,42 @@ Tabla.prototype.reajustar_tamano_celdas=function(w, h) {
 }
 
 
-Tabla.prototype.cambiar_opacidad=function(val) 
-{
+Tabla.prototype.cambiar_opacidad=function(val) {
 	this.opacidad=val;
-	var v=this.opacidad / 100;
-	this.DOM_tabla.style.opacity=v;
+	this.DOM_tabla.style.opacity=this.opacidad / 100;
 }
 
-Tabla.prototype.quitar_actual=function() 
-{
+Tabla.prototype.quitar_actual=function() {
 	this.DOM_tabla.classList.remove('actual');
 	this.DOM_rep_listado.classList.remove('actual');
 }
 
-Tabla.prototype.escoger_actual=function() 
-{
+Tabla.prototype.escoger_actual=function() {
 	this.DOM_tabla.classList.add('actual');
 	this.DOM_rep_listado.classList.add('actual');
 }
 
-Tabla.prototype.redimensionar=function(w, h)
-{
+Tabla.prototype.redimensionar=function(w, h) {
 	this.W=w;
 	this.H=h;
 	this.recrear();
 }
 
-Tabla.prototype.importar=function(texto) {
-	var filas=texto.split("\n");
-	var total=filas.length;
+Tabla.prototype.importar_json=function(datos) {
 
-	this.importar_linea_configuracion(filas[0]);
+	//Load config...
+	var set=CS.obtener_set_por_css(datos.css_set);
+	if(set) this.escoger_set(set);
 
-	var i=1;
-	var cadena_final='';
-	while(i < total) {
-		cadena_final+=(filas[i++]+"\n");
-	}
-	this.importar_linea_estado(cadena_final);
-}
+	this.cambiar_opacidad(datos.opacidad);
+	this.redimensionar(datos.w, datos.h);
 
-Tabla.prototype.importar_json=function(config, datos) {
+	H.establecer_wh(datos.w, datos.h);
 
-	this.importar_linea_configuracion_json(config);
-	var aquello=this;
+	//Load data.
 	var set=CS.obtener_set_por_css(this.css_set);
-	datos.forEach(function(_item) {
-		var c=aquello.obtener_celda_coordenadas(_item.x, _item.y);
+	datos.celdas.forEach((_item) => {
+		var c=this.obtener_celda_coordenadas(_item.x, _item.y);
 		if(c) {
 			var pt=_item.t;
 			if(set) pt=set.traducir_inversa(pt);
@@ -186,101 +169,7 @@ Tabla.prototype.importar_json=function(config, datos) {
 	});
 }
 
-Tabla.prototype.importar_linea_estado=function(linea) {
-	var l=linea.length;
-	var i=0;
-
-	var x=0;
-	var y=0;
-
-	var set=CS.obtener_set_por_css(this.css_set);
-
-	while(i < l)
-	{
-		var pt=linea[i++];
-
-		if(pt=='\n')
-		{
-			x=0;
-			++y;
-		}
-		else
-		{
-			var c=this.obtener_celda_coordenadas(x, y);
-			if(c) 
-			{
-				if(set) pt=set.traducir_inversa(pt);
-				H.establecer_clase_celda_manual(c, pt);
-			}
-			++x;
-		}
-	}
-}
-
-Tabla.prototype.obtener_info_configuracion_de_linea=function(linea)
-{
-	var val=linea.split(" ");
-	//w, h, css classname, order and opacity...
-	return new Info_config_linea(
-		parseInt(val[0], 10), parseInt(val[1], 10), val[2], parseInt(val[3], 10), parseInt(val[4], 10));
-}
-
-Tabla.prototype.obtener_info_configuracion_de_json=function(datos) {
-
-	return new Info_config_linea(datos.w, datos.h, datos.set, datos.orden, datos.opacidad);
-}
-
-Tabla.prototype.importar_linea_configuracion=function(linea)
-{
-	var config=this.obtener_info_configuracion_de_linea(linea);
-	var set=CS.obtener_set_por_css(config.css_set);
-	if(set) this.escoger_set(set);
-	this.cambiar_opacidad(config.opacidad);
-	this.redimensionar(config.w, config.h);
-	H.establecer_wh(config.w, config.h);
-}
-
-Tabla.prototype.importar_linea_configuracion_json=function(config) {
-	var set=CS.obtener_set_por_css(config.css_set);
-	if(set) this.escoger_set(set);
-	this.cambiar_opacidad(config.opacidad);
-	this.redimensionar(config.w, config.h);
-	H.establecer_wh(config.w, config.h);
-}
-
-Tabla.prototype.exportar=function() {
-	var texto=this.W+' '+this.H+' '+this.css_set+' '+this.orden+' '+this.opacidad+"\n";
-	var filas=this.DOM_tabla.rows;
-	var i=0;
-	var lf=filas.length;
-
-	var set=CS.obtener_set_por_css(this.css_set);
-
-	//La exportación se realiza en una sóla línea.
-	while(i < lf)
-	{
-		var fila=filas[i++];
-		var celdas=fila.querySelectorAll('td');
-		var lc=celdas.length;
-
-		var j=0;
-
-		while(j < lc) {
-			var clase=celdas[j++].className;
-			var num=clase.replace('tipo_', '');
-			if(set) num=set.traducir(num);
-			texto+=num;
-		}
-
-		texto+="\n";
-	}
-
-	texto+="\n";
-	
-	return texto;
-}
-
-Tabla.prototype.exportar_json=function() {
+Tabla.prototype.exportar_json=function(_ignore_zero) {
 
 	var resultado={'w': this.W,
 		'h' : this.H,
@@ -301,10 +190,18 @@ Tabla.prototype.exportar_json=function() {
 		var j=0;
 
 		while(j < celdas.length) {
-			var num=celdas[j].className.replace('tipo_', '');
-			if(set) num=set.traducir(num);
-			resultado.celdas.push({'x': j, 'y': i, 't':num});
-			j++;
+			var num=parseInt(celdas[j].className.replace('tipo_', ''));
+
+			if(_ignore_zero && !num) {
+				j++;
+				continue;
+			}
+			else {
+				if(set) num=set.traducir(num);
+				//TODO: Ignore the first one, if that's the case.
+				resultado.celdas.push({'x': j, 'y': i, 't':num});
+				j++;
+			}
 		}
 		i++;
 	}

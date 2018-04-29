@@ -61,8 +61,10 @@ Controlador_sets.prototype.recargar_selector_tiles=function(select) {
 Controlador_sets.prototype.obtener_set_por_css=function(t) {
 
 	let i=0;
-	while(i=0 < this.ARRAY_SETS.length) {
-		if(this.ARRAY_SETS[i].classname==t) return this.ARRAY_SETS[i];
+	while(i < this.ARRAY_SETS.length) {
+		if(this.ARRAY_SETS[i].classname==t) {
+			return this.ARRAY_SETS[i];
+		}
 		++i;
 	};
 

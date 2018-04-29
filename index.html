@@ -14,9 +14,6 @@
 	<script type="text/javascript" src="js/controlador_input.js"></script>
 	<script type="text/javascript" src="js/controlador_sets.js"></script>
 	<script type="text/javascript" src="js/set_tiles.js"></script>
-	<script type="text/javascript" src="js/info_config_linea.js"></script>
-	<script type="text/javascript" src="js/lector_doc.js"></script>
-	<script type="text/javascript" src="js/lector_XML.js"></script>
 </head>
 <body>
 	<style style="text/css" id="estilos_inline"></style>
@@ -61,14 +58,15 @@
 	<div id="caja_exportar" class="oculto ui_form_generico pop_up">
 		<input class="btn" type="button" value="&times;" id="btn_cerrar_exportar"/>
 		<textarea id="p_exportar"></textarea>
-		<input class="btn" type="button" id="btn_exportar_txt" value="Exportar TXT" />
+		<label>
+			<input type="checkbox" checked="true" id="check_ignorar_tipo_cero"> Ignorar celdas con tipo "0"
+		</label>
 		<input class="btn" type="button" id="btn_exportar_json" value="Exportar JSON" />
 	</div>
 
 	<div id="caja_importar" class="oculto ui_form_generico pop_up">
 		<input class="btn" type="button" value="&times;" id="btn_cerrar_importar"/>
 		<textarea class="txt" name="texto" id="textarea_importar"></textarea>
-		<input class="btn" type="button" id="btn_importar_txt" value="Importar TXT" />
 		<input class="btn" type="button" id="btn_importar_json" value="Importar JSON" />
 	</div>
 

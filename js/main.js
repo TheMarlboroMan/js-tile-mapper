@@ -5,10 +5,8 @@ var H=null;
 var C_IMP=null;
 var C_EXP=null;
 
-window.onload=function()
-{
-	function procesar_carga()
-	{
+window.onload=function() {
+	function procesar_carga() {
 		C_EXP=new Caja_exportacion();
 		C_IMP=new Caja_importacion();
 		CI=new Controlador_input();
@@ -18,8 +16,7 @@ window.onload=function()
 		CT=new Controlador_tablas();
 		CT.iniciar();
 	}
+
 	CS=new Controlador_sets();
 	CS.iniciar(procesar_carga);
 }
-
-/******************************************************************************/
