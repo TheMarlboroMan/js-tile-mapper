@@ -3,28 +3,40 @@
 		{"titulo" : "Plataformas",
 			"css" : "plataformas",
 			"src" : "sets/plataformas.png",
-			"trans" : " #-HMx\\|/="
+			"cw":32, "ch":32
 		},
 		{"titulo" : "Control",
 			"css" : "control",
 			"src" : "sets/control.png",
-			"trans" : " #=-/Z\\S{<}>7P95HMx"
+			"cw":16, "ch":16
 		},
 		{"titulo":"Control grande",
+			"css":"control_grande",
 			"src":"sets/control_big.png",
-			"trans":" #=-/Z\\S{<}>7P95HMx"
+			"cw":32, "ch":32
 		},
 		{"titulo":"Básico",
 			"css" : "basico",
-			"src":"sets/basico.png"},
+			"src":"sets/basico.png",
+			"cw":32, "ch":32
+		},
 		{"titulo":"Básico 2",
 			"css" : "basico2",
-			"src":"sets/basico2.png"},
+			"src":"sets/basico2.png",
+			"cw":32, "ch":32
+		},
 		{"titulo":"Basico 16x16",
 			"css" : "basico16x16",
-			"src":"sets/basico_16.png"},
+			"src":"sets/basico_16.png",
+			"cw":16, "ch":16},
+		{"titulo":"Basico 16x16 alt",
+			"css" : "basico16x16_2",
+			"src":"sets/basico_16_2.png",
+			"cw":16, "ch":16},
 		{"titulo":"Fondo 16x16",
 			"css" : "fondo16x16",
-			"src":"sets/background_16.png"}
+			"src":"sets/background_16.png",
+			"cw":16, "ch":16
+		}
 	]
 }

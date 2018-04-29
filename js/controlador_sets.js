@@ -13,8 +13,8 @@ Controlador_sets.prototype.iniciar=function(callback) {
 	.then((_res) => {return this.procesar_carga(_res);});
 }
 
-Controlador_sets.prototype.insertar_set=function(_w, _h, _titulo, _traduccion, _src, _css) {
-	this.ARRAY_SETS.push(new Set_tiles(_w, _h, _titulo, _traduccion, _src, _css));
+Controlador_sets.prototype.insertar_set=function(_w, _h, _cw, _ch, _titulo, _src, _css) {
+	this.ARRAY_SETS.push(new Set_tiles(_w, _h, _cw, _ch, _titulo, _src, _css));
 }
 
 Controlador_sets.prototype.procesar_carga=function(_json) {
@@ -22,9 +22,9 @@ Controlador_sets.prototype.procesar_carga=function(_json) {
 	let total=_json.sets.length;
 	let cargados=0;
 
-	let loadcb=(_img, _titulo, _traduccion, _src, _css) => {
+	let loadcb=(_img, _cw, _ch, _titulo, _src, _css) => {
 
-		this.insertar_set(_img.width, _img.height, _titulo, _traduccion, _src, _css);
+		this.insertar_set(_img.width, _img.height, _cw, _ch, _titulo, _src, _css);
 		if(++cargados==total) {
 			this.preparar_css();
 			if(this.callback) this.callback();
@@ -32,11 +32,8 @@ Controlador_sets.prototype.procesar_carga=function(_json) {
 	};
 
 	_json.sets.forEach((_item) => {
-
-		let traduccion=undefined !== _item.trans ? _item.trans : null;
-
 		let img=new Image();
-		img.onload=() => {loadcb(img, _item.titulo, traduccion, _item.src, _item.css);}
+		img.onload=() => {loadcb(img, _item.cw, _item.ch, _item.titulo, _item.src, _item.css);}
 		img.onerror=() => {throw new Error("Fallo al cargar "+_item.titulo+", src:"+ _item.src);}
 		img.src=_item.src;
 	});

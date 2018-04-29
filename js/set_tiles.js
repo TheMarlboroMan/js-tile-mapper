@@ -1,68 +1,43 @@
-function Set_tiles(_w, _h, _titulo, _trad, _src, _classname ) {
+function Set_tiles(_w, _h, _cw, _ch, _titulo, _src, _classname ) {
 	this.titulo=_titulo;
-	this.H=_h;
-	this.W=_w;
-	this.traduccion=_trad;
+	this.img_h=_h;
+	this.img_w=_w;
+	this.celda_w=_cw;
+	this.celda_h=_ch;
 	this.src=_src;
-	this.classname=_classname;;
+	this.classname=_classname;
 }
-
-Set_tiles.prototype.obtener_dim_celda=function() {return this.H-2;}
 
 Set_tiles.prototype.generar_cadena_css=function() {
 
-	var resultado="";
-	var dim_celda=this.H-2;
-	var total=this.W / this.H;
-	var i=0;
-	var x=0;
+	let css_tablas="#tablas table."+this.classname+" tr td {width: "+this.celda_w+"px; height: "+this.celda_h+"px; background-image: url('"+this.src+"');}\n";
+	let css_herramientas="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li {width: "+this.celda_w+"px; height: "+this.celda_h+"px;}\n";
+	css_herramientas+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li label {width: "+this.celda_w+"px; height: "+this.celda_h+"px; background-image: url('"+this.src+"'); }\n";
 
-	resultado+="#tablas table."+this.classname+" tr td {width: "+dim_celda+"px; height: "+dim_celda+"px; background-image: url('"+this.src+"');}\n";
+	let x=0, y=0, i=0;
+	for(x=0; x<this.img_w; x+=this.celda_w) {
+		for(y=0; y<this.img_h; y+=this.celda_h) {
 
-	while(i < total) {
-		resultado+="#tablas table."+this.classname+" tr td.tipo_"+i+" {background-position: "+x+"px 0px;}\n";
-		++i;
-		x-=this.H;
+			css_tablas+="#tablas table."+this.classname+" tr td.tipo_"+i+" {background-position: "+(-x)+"px "+(-y)+"px;}\n";
+			css_herramientas+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li.tipo_"+i+" label {background-position: "+(-x)+"px "+(-y)+"px;}\n";
+			i++;
+		}
 	}
 
-	resultado+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li {width: "+this.H+"px; height: "+this.H+"px;}\n";
-	resultado+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li label {width: "+this.H+"px; height: "+this.H+"px; background-image: url('"+this.src+"'); }\n";
-
-	i=0;
-	x=0;
-	while(i < total) {
-		resultado+="#herramientas #herramientas_tabla ul#listado_tiles."+this.classname+" li.tipo_"+i+" label {background-position: "+x+"px 0px;}\n";
-		++i;
-		x-=this.H;
-	}
-
-	return resultado;
-}
-
-//Tipo a texto
-Set_tiles.prototype.traducir=function(indice) {
-	if(!this.traduccion || !this.traduccion.length) return indice;
-	else return this.traduccion[indice];
-}
-
-//Texto a tipo...
-Set_tiles.prototype.traducir_inversa=function(texto) {
-	if(!this.traduccion || !this.traduccion.length) return texto;
-	else return this.traduccion.indexOf(texto);
+	return css_tablas+"\n"+css_herramientas;
 }
 
 Set_tiles.prototype.rellenar_selector=function(ul) {
 
 	ul.className=this.classname;
 
-	var total=this.W / this.H;
-	var i=0;
-
 	function click_input(input, i) 	{
 		input.onclick=function() {H.establecer_tipo_actual(i);}
 	}
 
-	while(i < total) {
+	var i=0;
+
+	while(i < (this.img_w * this.img_h) / (this.celda_w * this.celda_h)) {
 		var li=document.createElement('li');
 		li.className='tipo_'+i;
 		ul.appendChild(li);
@@ -82,5 +57,5 @@ Set_tiles.prototype.rellenar_selector=function(ul) {
 		if(i==0) input.onclick();
 
 		++i;
-	}	
+	}
 }

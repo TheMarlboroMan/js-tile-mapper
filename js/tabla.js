@@ -4,7 +4,6 @@ function Tabla(w, h, orden) {
 	this.W=w;
 	this.H=h;
 	this.css_set='';
-	this.dim_celda=0;
 
 //TODO: El orden debería usarse para dar también un zindex. No está comprobado que esto no de fallos.
 
@@ -93,21 +92,14 @@ Tabla.prototype.recrear=function() {
 		++y;
 	}
 
-	this.reajustar_dimensiones_tabla();
 }
 
 Tabla.prototype.escoger_set=function(set)
 {
 	if(set) {
-		this.dim_celda=set.obtener_dim_celda();
-		this.reajustar_dimensiones_tabla();
 		this.css_set=set.classname;
 		this.DOM_tabla.className=this.css_set;
 	}
-}
-
-Tabla.prototype.reajustar_dimensiones_tabla=function() {
-	this.DOM_tabla.style.width=(this.dim_celda * this.W)+'px';
 }
 
 Tabla.prototype.reajustar_tamano_celdas=function(w, h) {
@@ -149,7 +141,7 @@ Tabla.prototype.redimensionar=function(w, h) {
 Tabla.prototype.importar_json=function(datos) {
 
 	//Load config...
-	var set=CS.obtener_set_por_css(datos.css_set);
+	var set=CS.obtener_set_por_css(datos.set);
 	if(set) this.escoger_set(set);
 
 	this.cambiar_opacidad(datos.opacidad);
@@ -163,7 +155,6 @@ Tabla.prototype.importar_json=function(datos) {
 		var c=this.obtener_celda_coordenadas(_item.x, _item.y);
 		if(c) {
 			var pt=_item.t;
-			if(set) pt=set.traducir_inversa(pt);
 			H.establecer_clase_celda_manual(c, pt);
 		}
 	});
@@ -197,8 +188,6 @@ Tabla.prototype.exportar_json=function(_ignore_zero) {
 				continue;
 			}
 			else {
-				if(set) num=set.traducir(num);
-				//TODO: Ignore the first one, if that's the case.
 				resultado.celdas.push({'x': j, 'y': i, 't':num});
 				j++;
 			}
