@@ -4,9 +4,6 @@ function Tabla(w, h, orden) {
 	this.W=w;
 	this.H=h;
 	this.css_set='';
-
-//TODO: El orden debería usarse para dar también un zindex. No está comprobado que esto no de fallos.
-
 	this.orden=orden;
 	this.opacidad=100;
 }
@@ -17,8 +14,7 @@ Tabla.prototype.iniciar=function() {
 	this.recrear();
 }
 
-Tabla.prototype.crear_DOM=function() 
-{
+Tabla.prototype.crear_DOM=function() {
 	this.DOM_tabla=document.createElement('table');
 
 	//TODO: Use addEventHandler...

@@ -1,5 +1,4 @@
-function Caja_importacion()
-{
+function Caja_importacion() {
 	var DOM_caja=document.getElementById('caja_importar');
 	var DOM_btn_cerrar=document.getElementById('btn_cerrar_importar');
 	var DOM_btn_ejecutar_json=document.getElementById('btn_importar_json');
@@ -10,5 +9,5 @@ function Caja_importacion()
 	this.vaciar=function() {DOM_textarea.value='';}
 	
 	DOM_btn_cerrar.onclick=() => {this.ocultar();}
-	DOM_btn_ejecutar_json.onclick=function() {H.importar_json(DOM_textarea.value);}
+	DOM_btn_ejecutar_json.onclick=function() {CT.importar_json(DOM_textarea.value);}
 }

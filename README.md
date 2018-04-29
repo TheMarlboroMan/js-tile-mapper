@@ -2,7 +2,9 @@
 
 JS tile mapper. A very simple distraction dated from long ago.
 
-The code is done in an old JS style, with lots of global state scattered throughout. A refactor was started in late April, 2018, but I don't think it will end removing global state.
+The original code is done in an old JS style, with lots of global state scattered throughout. 
+
+A refactor was started in late April, 2018, but removing global state was way too much of a headache, so the refactor focused on removing useless code and functionality and improving readability.
 
 # FAQ:
 
@@ -18,7 +20,6 @@ The code is done in an old JS style, with lots of global state scattered through
 - Test import of multiple layers.
 - Do it ECMA6 style.
 	- We could get rid of a lot of var aquello=this;.
-- Add custom language strings ???
 - Add optional data to the maps, a form in the export. 
 - Import optional data too. 
 

@@ -2,10 +2,7 @@ function Herramientas_tabla() {
 	this.DOM_contenedor=document.getElementById('herramientas');
 	this.input_w=document.getElementById('redim_w');
 	this.input_h=document.getElementById('redim_h');
-//	this.input_grid_w=document.getElementById('grid_w');
-//	this.input_grid_h=document.getElementById('grid_h');
 	this.lista_tiles=document.getElementById('listado_tiles');
-	//this.lista_tablas=document.getElementById('listado_tablas');
 	this.select_set=document.getElementById('select_set');
 	this.btn_nueva_tabla=document.getElementById('btn_nueva_tabla');
 	this.btn_eliminar_tabla=document.getElementById('btn_eliminar_tabla');
@@ -92,9 +89,4 @@ Herramientas_tabla.prototype.recargar_listado_tiles=function(indice) {
 
 	var s=CS.obtener_set_por_indice(indice);
 	if(s) s.rellenar_selector(this.lista_tiles);
-}
-
-//TODO: Is this ever used???
-Herramientas_tabla.prototype.importar_json=function(datos) {
-	CT.importar_json(datos);
 }
