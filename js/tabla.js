@@ -137,7 +137,9 @@ Tabla.prototype.importar_json=function(datos) {
 
 	//Load config...
 	var set=CS.obtener_set_por_css(datos.set);
-	if(set) this.escoger_set(set);
+	if(set) {
+		this.escoger_set(set);
+	}
 
 	this.cambiar_opacidad(datos.opacidad);
 	this.redimensionar(datos.w, datos.h);
