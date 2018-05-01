@@ -23,6 +23,7 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 	var evento=event ? event : window.event;
 
 	if(!evento.shiftKey) {
+		//TODO: Act upon the model, let the model attack the cell.
 		H.establecer_clase_celda(celda);
 	}
 	else {
@@ -41,9 +42,11 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 					var ini=y < this.ULTIMO_CLICK_Y ? y : this.ULTIMO_CLICK_Y;
 					var fin=y > this.ULTIMO_CLICK_Y ? y : this.ULTIMO_CLICK_Y;
 
-					while(ini <= fin)
-					{
+					while(ini <= fin) {
+						//TODO: Change for something that says DOM... 
+						//or maybe not, this is the origin.
 						var c=CT.obtener_celda_coordenadas(x, ini++);
+						//TODO: Act upon the model, have the model attack the cell.
 						if(c) H.establecer_clase_celda(c);
 					}
 				}
@@ -52,7 +55,9 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 					var fin=x > this.ULTIMO_CLICK_X ? x : this.ULTIMO_CLICK_X;
 
 					while(ini <= fin) {
+						//TODO: The DOM thing.
 						var c=CT.obtener_celda_coordenadas(ini++, y);
+						//TODO: Act upon the model.
 						if(c) H.establecer_clase_celda(c);
 					}
 				}

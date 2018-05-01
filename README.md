@@ -1,6 +1,6 @@
 # js-tile-mapper
 
-JS tile mapper. A very simple distraction dated from long ago.
+JS tile editor. A very simple distraction dated from long ago.
 
 The original code is done in an old JS style, with lots of global state scattered throughout. 
 
@@ -21,11 +21,12 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
-- Test import of multiple layers.
-- Do it ECMA6 style.
-	- We could get rid of a lot of var aquello=this;.
+- Separate table view from model.
+- Add custom attributes for cells.
 - Add optional data to the maps, a form in the export. 
 - Import optional data too. 
+- Do it ECMA6 style.
+	- We could get rid of a lot of var aquello=this;.
 
 # DONE 
 

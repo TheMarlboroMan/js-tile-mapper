@@ -13,12 +13,13 @@ function Controlador_tablas()
 		H.cargar_valores_de_tabla(TABLA_ACTUAL);
 	}
 
-	this.escoger_primera_tabla=function() {this.seleccionar_tabla(TABLAS[0]);}
-	this.obtener_tabla_actual=function() {return TABLA_ACTUAL;}
-	this.obtener_array_tablas=function() {return TABLAS;}
-	this.obtener_total_tablas=function() {return TABLAS.length;}
+	this.escoger_primera_tabla=() => {this.seleccionar_tabla(TABLAS[0]);}
+	this.obtener_tabla_actual=() => {return TABLA_ACTUAL;}
+	this.obtener_array_tablas=() => {return TABLAS;}
+	this.obtener_total_tablas=() => {return TABLAS.length;}
 
 	this.eliminar_tabla_actual=() => {
+
 		if(this.obtener_total_tablas() > 1)
 		{
 			var indice=TABLAS.indexOf(TABLA_ACTUAL);
@@ -53,6 +54,7 @@ function Controlador_tablas()
 	}
 }
 
+//TODO: Ok, change for something that says DOM?
 Controlador_tablas.prototype.obtener_celda_coordenadas=function(x, y) {
 	return this.obtener_tabla_actual().obtener_celda_coordenadas(x, y);
 }
@@ -62,6 +64,7 @@ Controlador_tablas.prototype.nueva_tabla=function() {
 	var ancho=H.obtener_w();
 	var alto=H.obtener_h();
 
+	//TODO: UNNECESARY SEPARATION OF TWO FUNCTIONS!!.
 	var T=new Tabla(ancho, alto);
 	T.iniciar();
 	T.escoger_set(CS.obtener_set_por_indice(0));
@@ -77,12 +80,6 @@ Controlador_tablas.prototype.cambiar_opacidad_tabla_actual=function(val) {
 Controlador_tablas.prototype.redimensionar_tablas=function(w, h) {
 	this.obtener_array_tablas().forEach((_item) => {
 		_item.redimensionar(w, h);
-	});
-}
-
-Controlador_tablas.prototype.reajustar_tamano_celdas=function(w, h) {
-	this.obtener_array_tablas().forEach( (_item) => {
-		_item.reajustar_tamano_celdas(w, h);
 	});
 }
 
