@@ -75,8 +75,6 @@ Herramientas_tabla.prototype.mostrar=function(event) {
 Herramientas_tabla.prototype.ocultar=function(){this.DOM_contenedor.classList.add('oculto');}
 Herramientas_tabla.prototype.obtener_w=function(){return parseInt(this.input_w.value, 10);}
 Herramientas_tabla.prototype.obtener_h=function(){return parseInt(this.input_h.value, 10);}
-Herramientas_tabla.prototype.establecer_clase_celda=function(c){c.className='tipo_'+this.obtener_tipo_actual();}
-Herramientas_tabla.prototype.establecer_clase_celda_manual=function(c, t){c.className='tipo_'+t;}
 Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_selector_tiles(this.select_set);}
 
 Herramientas_tabla.prototype.cargar_valores_de_tabla=function(t) {

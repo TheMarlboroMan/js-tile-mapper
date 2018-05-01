@@ -22,9 +22,14 @@ function Controlador_input() {
 Controlador_input.prototype.click_celda=function(event, celda) {
 	var evento=event ? event : window.event;
 
+	let c=H.obtener_tipo_actual();
+
 	if(!evento.shiftKey) {
-		//TODO: Act upon the model, let the model attack the cell.
-		H.establecer_clase_celda(celda);
+		let x=parseInt(celda.getAttribute('data-x'), 10);
+		let y=parseInt(celda.getAttribute('data-y'), 10);
+		CT.actualizar_modelo(x, ini++, c):
+		//TODO: Killing flies with a flak cannon.
+		CT.volcar_modelo_en_DOM();
 	}
 	else {
 		if(this.ULTIMO_CLICK_X < 0 || this.ULTIMO_CLICK_Y < 0)  {
@@ -43,23 +48,19 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 					var fin=y > this.ULTIMO_CLICK_Y ? y : this.ULTIMO_CLICK_Y;
 
 					while(ini <= fin) {
-						//TODO: Change for something that says DOM... 
-						//or maybe not, this is the origin.
-						var c=CT.obtener_celda_coordenadas(x, ini++);
-						//TODO: Act upon the model, have the model attack the cell.
-						if(c) H.establecer_clase_celda(c);
+						CT.actualizar_modelo(x, ini++, c):
 					}
+					CT.volcar_modelo_en_DOM();
+
 				}
 				else if(y==this.ULTIMO_CLICK_Y) {
 					var ini=x < this.ULTIMO_CLICK_X ? x : this.ULTIMO_CLICK_X;
 					var fin=x > this.ULTIMO_CLICK_X ? x : this.ULTIMO_CLICK_X;
 
 					while(ini <= fin) {
-						//TODO: The DOM thing.
-						var c=CT.obtener_celda_coordenadas(ini++, y);
-						//TODO: Act upon the model.
-						if(c) H.establecer_clase_celda(c);
+						CT.actualizar_modelo(ini++, y, c);
 					}
+					CT.volcar_modelo_en_DOM();
 				}
 			}
 		}

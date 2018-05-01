@@ -54,9 +54,12 @@ function Controlador_tablas()
 	}
 }
 
-//TODO: Ok, change for something that says DOM?
-Controlador_tablas.prototype.obtener_celda_coordenadas=function(x, y) {
-	return this.obtener_tabla_actual().obtener_celda_coordenadas(x, y);
+Controlador_tablas.prototype.volcar_modelo_en_DOM=function() {
+	return this.obtener_tabla_actual().volcar_modelo_en_DOM();
+}
+
+Controlador_tablas.actualizar_modelo=function(_x, _y, _tipo) {
+	this.obtener_tabla_actual().actualizar_modelo(_x, _y, _tipo);
 }
 
 Controlador_tablas.prototype.nueva_tabla=function() {
