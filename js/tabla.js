@@ -93,7 +93,7 @@ Tabla.prototype.volcar_modelo_en_DOM=function() {
 Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
 
 	//TODO. Check this.
-	return this.modelo[ (y*this.H) + (x % this.W)];
+	return this.modelo[ (x) + (y*this.W)];
 }
 
 //!This needs a DOM cell.already.
@@ -188,7 +188,7 @@ Tabla.prototype.cambiar_opacidad=function(val) {
 /*
 //TODO: Erase when not needed.
 
-Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
+Tabla.prototype.obtener_td_coordenadas=function(x, y) {
 
 	var row=this.DOM_tabla.rows[y];
 	if(!row) {
