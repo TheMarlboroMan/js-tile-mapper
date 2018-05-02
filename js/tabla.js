@@ -12,9 +12,11 @@ function Tabla(w, h) {
 	this.H=h;
 	this.css_set='';
 	this.opacidad=100;
-
-	//The real model.
 	this.modelo=[];
+
+	this.tabla_click_handler=null;
+	this.tabla_over_handler=null;
+	this.listado_click_handler=null;
 
 	this.crear_modelo();
 	this.crear_DOM();
@@ -43,19 +45,16 @@ Tabla.prototype.crear_DOM=function() {
 
 	this.DOM_tabla=document.createElement('table');
 
-	//TODO: Use addEventHandler...
-	this.DOM_tabla.onclick=function(event) 	{
+	this.tabla_click_handler=this.DOM_tabla.addEventListener('click', (event) => {
 		event=event ? event : window.event;
-		var celda=event.target;
-		CI.click_celda(event, celda);
-	}
-	//TODO: Use addEventHandler...
-	this.DOM_tabla.onmouseover=function(event) {
+		CI.click_celda(event, event.target);
+	}, true);
 
+	this.tabla_over_handler=this.DOM_tabla.addEventListener('mouseover', (event) => {
 		event=event ? event : window.event;
 		var celda=event.target;
 		document.getElementById("navegacion").innerHTML=parseInt(celda.getAttribute('data-x'), 10)+' '+parseInt(celda.getAttribute('data-y'), 10);
-	}
+	}, true);
 
 	let y=0;
 	while(y < this.H) {
@@ -73,8 +72,7 @@ Tabla.prototype.crear_DOM=function() {
 
 	//También, añadir el tema del listado...
 	this.DOM_rep_listado=document.createElement('li');
-	//TODO Use event handlers
-	this.DOM_rep_listado.onclick=() => {CT.seleccionar_tabla(this);}
+	this.listado_click_handler=this.DOM_rep_listado.addEventListener('click', () => {CT.seleccionar_tabla(this);}, true);
 
 	document.getElementById('tablas').appendChild(this.DOM_tabla);
 	document.getElementById('listado_tablas').appendChild(this.DOM_rep_listado);
@@ -92,7 +90,6 @@ Tabla.prototype.volcar_modelo_en_DOM=function() {
 
 Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
 
-	//TODO. Check this.
 	return this.modelo[ (x) + (y*this.W)];
 }
 
@@ -102,7 +99,7 @@ Tabla.prototype.volcar_modelo_en_celda_DOM=function(_cmodelo, _celda) {
 	_celda.className='tipo_'+_cmodelo.tipo;
 
 	if(_cmodelo.atributos.length) {
-		//TODO.
+		//TODO: Show something special on the cell.
 	}
 }
 
@@ -113,7 +110,14 @@ Tabla.prototype.actualizar_modelo=function(_x, _y, _tipo) {
 }
 
 Tabla.prototype.destruir=function() {
-	//TODO: Erase handlers!!!
+
+	this.DOM_tabla.removeEventListener('click', this.tabla_click_handler, true);
+	this.DOM_tabla.removeEventListener('mouseover', this.tabla_over_handler, true);
+	this.DOM_rep_listado.removeEventListener('click', this.listado_click_handler, true);
+
+	this.tabla_click_handler=null;
+	this.tabla_over_handler=null;
+	this.listado_click_handler=null;
 
 	this.modelo.length=0;
 	this.DOM_tabla.parentNode.removeChild(this.DOM_tabla);

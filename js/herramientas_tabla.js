@@ -61,18 +61,17 @@ function Herramientas_tabla() {
 	this.establecer_tipo_actual=function(v) {tipo_actual=v;}
 }
 
-Herramientas_tabla.prototype.intercambiar=function(event) {
-	if(this.DOM_contenedor.classList.contains('oculto')) this.mostrar(event);
-	else this.ocultar(event);
+Herramientas_tabla.prototype.intercambiar=function() {
+	if(this.DOM_contenedor.classList.contains('oculto')) this.mostrar();
+	else this.ocultar();
 }
 
 Herramientas_tabla.prototype.mostrar=function(event) {
 	this.DOM_contenedor.classList.remove('oculto');
-	this.DOM_contenedor.style.left=event.clientX - (this.DOM_contenedor.offsetWidth / 2)+'px';
-	this.DOM_contenedor.style.top=event.clientY - (this.DOM_contenedor.offsetHeight / 2)+'px';
 }
 
 Herramientas_tabla.prototype.ocultar=function(){this.DOM_contenedor.classList.add('oculto');}
+
 Herramientas_tabla.prototype.obtener_w=function(){return parseInt(this.input_w.value, 10);}
 Herramientas_tabla.prototype.obtener_h=function(){return parseInt(this.input_h.value, 10);}
 Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_selector_tiles(this.select_set);}

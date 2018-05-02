@@ -12,7 +12,12 @@ body {background: #f0f0f0; font-family: monospace;}
 #tablas table tr:first-child td {}
 #tablas table tr td { border: 1px dotted #777; background: #fff; cursor: pointer; background-position: 0px 0px; padding: 0px; margin: 0px;}
 
-#herramientas {width: 600px; height: 300px; overflow: hidden; z-index: 5000 !important;}
+#herramientas {
+	position: absolute;
+	width: 600px; left: -300px; margin-left: 50%; 
+	height: 400px; top: 0px; margin-top: 20px; 
+	overflow: hidden; z-index: 5000 !important;
+}
 
 #herramientas #herramientas_generales {position: absolute; width: 580px; left: -570px; border-right: 5px dashed #000; transition: all 0.3s; background-color: #ccc; border-radius: 0px 10px 10px 0px; z-index: 2;}
 #herramientas #herramientas_generales:hover {left: 0px;}

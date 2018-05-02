@@ -21,7 +21,6 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
-- Separate table view from model.
 - Add custom attributes for cells.
 - Add optional data to the maps, a form in the export. 
 - Import optional data too. 
@@ -37,6 +36,7 @@ A refactor was started in late April, 2018, but removing global state was way to
 - Remove the old XML loading style.
 - Erase the cell translations.
 - Erase order. It does nothing.
+- Separate table view from model.
 
 # Credits:
 
