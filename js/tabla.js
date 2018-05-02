@@ -1,8 +1,8 @@
 function Celda(_x, _y, _t) {
 	this.x=_x;
 	this.y=_y;
-	this.tipo=_y;
-	this.attributos=[];
+	this.tipo=_t;
+	this.atributos=[];
 }
 
 function Tabla(w, h) {
@@ -14,18 +14,32 @@ function Tabla(w, h) {
 	this.opacidad=100;
 
 	//The real model.
-	this.celdas=[];
-	for(let y=0; y<this.H; y++) {
-		for(let x=0; x<this.W; x++) {
-			this.celdas.push(new Celda(x, y, 0));
-		}
-	}
+	this.modelo=[];
 
+	this.crear_modelo();
 	this.crear_DOM();
 	this.volcar_modelo_en_DOM();
 }
 
+Tabla.prototype.crear_modelo=function() {
+
+	this.modelo.length=0;
+	for(let y=0; y<this.H; y++) {
+		for(let x=0; x<this.W; x++) {
+			this.modelo.push(new Celda(x, y, 0));
+		}
+	}
+}
+
 Tabla.prototype.crear_DOM=function() {
+
+	if(this.DOM_tabla) {
+		this.DOM_tabla.parentNode.removeChild(this.DOM_tabla);
+		this.DOM_rep_listado.parentNode.removeChild(this.DOM_rep_listado);
+
+		this.DOM_tabla=null;
+		this.DOM_rep_listado=null;
+	}
 
 	this.DOM_tabla=document.createElement('table');
 
@@ -79,10 +93,11 @@ Tabla.prototype.volcar_modelo_en_DOM=function() {
 Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
 
 	//TODO. Check this.
-	return this.model[y*this.H, x % this.W];
+	return this.modelo[ (y*this.H) + (x % this.W)];
 }
 
-Tabla.prototype.volcar_modelo_en_celda_DOM(_cmodelo, _celda) {
+//!This needs a DOM cell.already.
+Tabla.prototype.volcar_modelo_en_celda_DOM=function(_cmodelo, _celda) {
 
 	_celda.className='tipo_'+_cmodelo.tipo;
 
@@ -91,9 +106,9 @@ Tabla.prototype.volcar_modelo_en_celda_DOM(_cmodelo, _celda) {
 	}
 }
 
+//This does not update the DOM cell.
 Tabla.prototype.actualizar_modelo=function(_x, _y, _tipo) {
 
-	//This does not update the DOM cell.
 	this.obtener_celda_coordenadas(_x, _y).tipo=_tipo;
 }
 
@@ -108,40 +123,26 @@ Tabla.prototype.destruir=function() {
 Tabla.prototype.redimensionar=function(w, h) {
 	this.W=w;
 	this.H=h;
-	//TODO: What about recreating the model and then recreating the whole
-	//DOM.
-	//TODO: What if we also try to preserve the existing data??? We can
-	//create a new array, fill it and then copy the relevant values.
-	this.recrear_DOM();
+
+	//Original data is preserved.
+	let copia=this.modelo.map((_item) => {return _item;});
+	this.crear_modelo();
+
+	copia.forEach((_item) => {this.actualizar_modelo(_item.x, _item.y, _item.tipo);});
+	this.crear_DOM();
 }
 
 Tabla.prototype.importar_json=function(datos) {
-
-	//Load config...
-	var set=CS.obtener_set_por_css(datos.set);
-	if(set) {
-		this.escoger_set(set);
-	}
 
 	this.cambiar_opacidad(datos.opacidad);
 	this.redimensionar(datos.w, datos.h);
 
 	H.establecer_wh(datos.w, datos.h);
 
-	//TODO: We should actually import into the model here.
-	//Load data.
-/*
-	var set=CS.obtener_set_por_css(this.css_set);
-	datos.celdas.forEach((_item) => {
-		//TODO: Change... for a name that says "DOM".
-		var c=this.obtener_celda_coordenadas(_item.x, _item.y);
-		if(c) {
-			var pt=_item.t;
-			H.establecer_clase_celda_manual(c, pt);
-		}
-	});
-*/
+	datos.celdas.forEach((_item) => {this.actualizar_modelo(_item.x, _item.y, _item.t);});
+
 	this.volcar_modelo_en_DOM();
+	this.escoger_set(CS.obtener_set_por_css(datos.set));
 }
 
 Tabla.prototype.exportar_json=function(_ignore_zero) {
@@ -153,33 +154,11 @@ Tabla.prototype.exportar_json=function(_ignore_zero) {
 		'celdas' : [],
 	};
 
-	var filas=this.DOM_tabla.rows;
-	var i=0;
-	var lf=filas.length;
-
-	var set=CS.obtener_set_por_css(this.css_set);
-
-	//TODO: Export the model, not the view!!!!.
-
-	while(i < lf) {
-		var celdas=filas[i].querySelectorAll('td');
-		var j=0;
-
-		while(j < celdas.length) {
-			var num=parseInt(celdas[j].className.replace('tipo_', ''));
-
-			if(_ignore_zero && !num) {
-				j++;
-				continue;
-			}
-			else {
-//TODO: Do not export attributes if they don't hold values.
-				resultado.celdas.push({'x': j, 'y': i, 't':num});
-				j++;
-			}
+	this.modelo.forEach((_item) => {
+		if(!_ignore_zero || _item.tipo || _item.atributos.length) {
+			resultado.celdas.push({'x': _item.x, 'y': _item.y, 't':_item.tipo});
 		}
-		i++;
-	}
+	});
 
 	return resultado;
 }

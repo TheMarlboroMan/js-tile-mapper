@@ -58,7 +58,7 @@ Controlador_tablas.prototype.volcar_modelo_en_DOM=function() {
 	return this.obtener_tabla_actual().volcar_modelo_en_DOM();
 }
 
-Controlador_tablas.actualizar_modelo=function(_x, _y, _tipo) {
+Controlador_tablas.prototype.actualizar_modelo=function(_x, _y, _tipo) {
 	this.obtener_tabla_actual().actualizar_modelo(_x, _y, _tipo);
 }
 
@@ -67,9 +67,7 @@ Controlador_tablas.prototype.nueva_tabla=function() {
 	var ancho=H.obtener_w();
 	var alto=H.obtener_h();
 
-	//TODO: UNNECESARY SEPARATION OF TWO FUNCTIONS!!.
 	var T=new Tabla(ancho, alto);
-	T.iniciar();
 	T.escoger_set(CS.obtener_set_por_indice(0));
 	
 	this.insertar_tabla(T);

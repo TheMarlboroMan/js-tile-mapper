@@ -23,11 +23,12 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 	var evento=event ? event : window.event;
 
 	let c=H.obtener_tipo_actual();
+	let x=parseInt(celda.getAttribute('data-x'), 10);
+	let y=parseInt(celda.getAttribute('data-y'), 10);
 
 	if(!evento.shiftKey) {
-		let x=parseInt(celda.getAttribute('data-x'), 10);
-		let y=parseInt(celda.getAttribute('data-y'), 10);
-		CT.actualizar_modelo(x, ini++, c):
+
+		CT.actualizar_modelo(x, y, c);
 		//TODO: Killing flies with a flak cannon.
 		CT.volcar_modelo_en_DOM();
 	}
@@ -36,9 +37,6 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 			return;
 		}
 		else {
-			var x=parseInt(celda.getAttribute('data-x'), 10);
-			var y=parseInt(celda.getAttribute('data-y'), 10);
-
 			if(x==this.ULTIMO_CLICK_X && y==this.ULTIMO_CLICK_Y) {
 				return;
 			}
@@ -48,7 +46,7 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 					var fin=y > this.ULTIMO_CLICK_Y ? y : this.ULTIMO_CLICK_Y;
 
 					while(ini <= fin) {
-						CT.actualizar_modelo(x, ini++, c):
+						CT.actualizar_modelo(x, ini++, c);
 					}
 					CT.volcar_modelo_en_DOM();
 
