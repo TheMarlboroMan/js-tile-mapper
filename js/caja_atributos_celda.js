@@ -83,7 +83,7 @@ Caja_atributos_celda.prototype.guardar=function() {
 	this.celda.atributos={};
 	this.atributos.forEach((_item) => {
 		if(_item.valor.length && _item.clave.length) {
-			this.celda.atributos[_item.clave]=_item.valor;
+			this.celda.atributos[_item.clave.trim()]=_item.valor.trim();
 		}
 	});
 

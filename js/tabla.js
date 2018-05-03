@@ -81,7 +81,6 @@ Tabla.prototype.crear_DOM=function() {
 Tabla.prototype.volcar_modelo_en_DOM=function() {
 
 	this.DOM_tabla.querySelectorAll('td').forEach((_item) => {
-	
 		let x=parseInt(_item.getAttribute('data-x'), 10);
 		let y=parseInt(_item.getAttribute('data-y'), 10);
 		this.volcar_modelo_en_celda_DOM(this.obtener_celda_coordenadas(x, y), _item);

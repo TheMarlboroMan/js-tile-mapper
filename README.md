@@ -18,6 +18,8 @@ A refactor was started in late April, 2018, but removing global state was way to
 	Check the assets/sets.json file. You can add sets here. "titulo" is a value for the selector, "css" is a name that must be unique and you can choose, "src" is the path to your tile file, "cw" and "ch" are cell width and height in pixels.
 	Be sure your images are "evenly sized", that is, the reminder of img_w / cell_w or img_h / cell_h must be zero.
 
+- How can I delete an attribute from a cell?
+	Just edit the attributes and leave the name and value blank.
 
 # TODO: 
 
