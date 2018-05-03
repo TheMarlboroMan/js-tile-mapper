@@ -11,28 +11,19 @@ body {background: #f0f0f0; font-family: monospace;}
 #tablas table tr {}
 #tablas table tr:first-child td {}
 #tablas table tr td { border: 1px dotted #777; background: #fff; cursor: pointer; background-position: 0px 0px; padding: 0px; margin: 0px;}
-
-#herramientas {
-	position: absolute;
-	width: 600px; left: -300px; margin-left: 50%; 
-	height: 400px; top: 0px; margin-top: 20px; 
-	overflow: hidden; z-index: 5000 !important;
-}
+#tablas table tr td.con_atributo {border: 1px solid #933; background: #933; color: #933;}
+#herramientas {position: absolute; overflow: hidden; z-index: 5000 !important;}
 
 #herramientas #herramientas_generales {position: absolute; width: 580px; left: -570px; border-right: 5px dashed #000; transition: all 0.3s; background-color: #ccc; border-radius: 0px 10px 10px 0px; z-index: 2;}
-#herramientas #herramientas_generales:hover {left: 0px;}
+#herramientas #herramientas_generales:hover {left: -10px;}
 #herramientas #herramientas_generales #redim_w,
-#herramientas #herramientas_generales #redim_h,
-#herramientas #herramientas_generales #grid_w,
-#herramientas #herramientas_generales #grid_h {width: 2em;} 
+#herramientas #herramientas_generales #redim_h {width: 2em;} 
 #herramientas #herramientas_generales input[type="button"] {margin: 4px;}
 #herramientas #herramientas_generales ul#listado_tablas {list-style: none; margin: 0px; padding: 0px;}
 #herramientas #herramientas_generales ul#listado_tablas li {float: left; margin: 2px; width: 15px; height: 15px; border: 1px dashed #7F6727; background: #fff; display: block;}
 #herramientas #herramientas_generales ul#listado_tablas li.actual {background: #EFC24A; border: 1px solid #7F6727; }
 
-
 #herramientas #herramientas_tabla {padding-left: 20px; z-index: 1;/*position: absolute; width: 350px; right: -330px; border-left: 5px dashed #ccc; transition: all 0.3s;*/}
-/*#herramientas #herramientas_tabla:hover {right: 0px;}*/
 
 #herramientas #herramientas_tabla ul#listado_tiles {overflow: hidden; list-style: none; margin: 0px; padding: 0px; width: 100%; height: 200px; overflow-y: scroll;}
 #herramientas #herramientas_tabla ul#listado_tiles li {float: left; margin: 2px;}
@@ -40,31 +31,24 @@ body {background: #f0f0f0; font-family: monospace;}
 #herramientas #herramientas_tabla ul#listado_tiles label {opacity: 0.5; cursor: pointer; display: block;}
 #herramientas #herramientas_tabla ul#listado_tiles input:checked+label {opacity: 1;}
 #herramientas #herramientas_tabla input#input_opacidad {width: 3em;}
-/*
-#herramientas #botonera_tabla {position: absolute; bottom: 0px;}
-#herramientas #botonera_tabla input {}
-*/
-.ui_form_generico {}
+
+.pop_up {background: #EFC24A; padding: 10px; box-shadow: 2px 2px 4px rgba(0,0,0,.3); position: fixed; border-radius: 10px;}
+
+.ui_form_generico {width: 600px; height: 400px; top: 50%; left: 50%; margin-left: -300px; margin-top: -200px; z-index: 10003;}
 .ui_form_generico div {margin: 10px;}
-.ui_form_generico label {}
+.ui_form_generico label {display: block}
 .ui_form_generico input.btn  {border: none; background: #fff; padding: 2px 6px; border-radius: 12px; text-align: center; color: #000; font-weight: bold; cursor: pointer;}
 .ui_form_generico input.btn:hover {background: #000; color: #fff; transition: all 0.3s}
 .ui_form_generico input.txt  {border: 1px solid #000; background: #fff; color: #000; font-family: monospace;}
 .ui_form_generico select {border: none; background: #fff; padding: 2px 6px;}
-
-.pop_up {background: #EFC24A; padding: 10px; box-shadow: 2px 2px 4px rgba(0,0,0,.3); position: fixed; border-radius: 10px;}
-
-#caja_nuevo_set,
-#caja_exportar,
-#caja_importar {width: 600px; height: 400px; top: 50%; left: 50%; margin-left: -300px; margin-top: -200px; z-index: 10003;}
-
-#caja_nuevo_set label,
-#caja_exportar label,
-#caja_importar label {display: block;}
-
-#caja_nuevo_set #btn_cerrar_nuevo_set,
-#caja_exportar #btn_cerrar_exportar,
-#caja_importar #btn_cerrar_importar {position: absolute; top: 10px; right: 10px;}
+.ui_form_generico input[type="button"].cerrar {position: absolute; top: 10px; right: 10px;}
+.ui_form_generico input[type="button"].ok {position: absolute; bottom: 10px; left: 10px;}
 
 #caja_exportar textarea {width: 90%; height: 80%; margin: 10px auto; background: #000; color: #fff; font-family: monospace; overflow-y: scroll;}
 #caja_importar textarea {width: 90%; height: 344px; margin: 10px auto; overflow-y: scroll;}
+
+#caja_atributos_celda #interface_atributos {width: 80%; height: 300px; margin: auto; overflow-y: scroll; background: #000; position: relative;}  
+#caja_atributos_celda #interface_atributos #btn_nuevo_atributo_celda {position: absolute; bottom: 10px; right: 10px;}
+#caja_atributos_celda #interface_atributos input[type="text"] {width: 8em; float: left;}
+#caja_atributos_celda #interface_atributos ul {display: block;}
+#caja_atributos_celda #interface_atributos ul li {display: block; list-style: none; width: 100%;}

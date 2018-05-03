@@ -20,14 +20,10 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 	let y=parseInt(celda.getAttribute('data-y'), 10);
 
 	if(evento.ctrlKey) {
-		//TODO	Get the model cell...
-		//	There is no H obtener_celda_coordenadas... there should be,
-		//TODO	Open the attribute modal with the model.
-		//	There is no attribute modal. Should be.
-		//TODO	The rest shall depend on the modal.
-		//	The modal should be the one to update the cell 
-		//	and ask an update of the view.
+		let celda=CT.obtener_celda_coordenadas(x, y);
+		CAC.mostrar(celda);
 	}
+
 	//Trazar líneas...
 	else if(evento.shiftKey) {
 

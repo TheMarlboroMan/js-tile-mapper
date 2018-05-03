@@ -2,7 +2,7 @@ function Celda(_x, _y, _t) {
 	this.x=_x;
 	this.y=_y;
 	this.tipo=_t;
-	this.atributos=[];
+	this.atributos={};
 }
 
 function Tabla(w, h) {
@@ -97,16 +97,17 @@ Tabla.prototype.obtener_celda_coordenadas=function(x, y) {
 Tabla.prototype.volcar_modelo_en_celda_DOM=function(_cmodelo, _celda) {
 
 	_celda.className='tipo_'+_cmodelo.tipo;
-
-	if(_cmodelo.atributos.length) {
-		//TODO: Show something special on the cell.
+	if(Object.keys(_cmodelo.atributos).length) {
+		_celda.classList.add('con_atributo');
 	}
 }
 
 //This does not update the DOM cell.
-Tabla.prototype.actualizar_modelo=function(_x, _y, _tipo) {
+Tabla.prototype.actualizar_modelo=function(_x, _y, _tipo, _attr) {
 
-	this.obtener_celda_coordenadas(_x, _y).tipo=_tipo;
+	let celda=this.obtener_celda_coordenadas(_x, _y);
+	celda.tipo=_tipo;
+	if(undefined!==_attr) celda.atributos=_attr;
 }
 
 Tabla.prototype.destruir=function() {
@@ -132,7 +133,7 @@ Tabla.prototype.redimensionar=function(w, h) {
 	let copia=this.modelo.map((_item) => {return _item;});
 	this.crear_modelo();
 
-	copia.forEach((_item) => {this.actualizar_modelo(_item.x, _item.y, _item.tipo);});
+	copia.forEach((_item) => {this.actualizar_modelo(_item.x, _item.y, _item.tipo, _item.atributos);});
 	this.crear_DOM();
 }
 
@@ -143,7 +144,11 @@ Tabla.prototype.importar_json=function(datos) {
 
 	H.establecer_wh(datos.w, datos.h);
 
-	datos.celdas.forEach((_item) => {this.actualizar_modelo(_item.x, _item.y, _item.t);});
+	datos.celdas.forEach((_item) => {
+
+		let attr=undefined!==_item.a ? _item.a : undefined; //Lol.
+		this.actualizar_modelo(_item.x, _item.y, _item.t, attr);
+	});
 
 	this.volcar_modelo_en_DOM();
 	this.escoger_set(CS.obtener_set_por_css(datos.set));
@@ -159,8 +164,12 @@ Tabla.prototype.exportar_json=function(_ignore_zero) {
 	};
 
 	this.modelo.forEach((_item) => {
-		if(!_ignore_zero || _item.tipo || _item.atributos.length) {
-			resultado.celdas.push({'x': _item.x, 'y': _item.y, 't':_item.tipo});
+		if(!_ignore_zero || _item.tipo || Object.keys(_item.atributos).length) {
+			let obj={'x': _item.x, 'y': _item.y, 't':_item.tipo};
+			if(Object.keys(_item.atributos).length) {
+				obj.a=_item.atributos;
+			}
+			resultado.celdas.push(obj);
 		}
 	});
 

@@ -118,3 +118,8 @@ Controlador_tablas.prototype.iniciar=function() {
 	this.nueva_tabla();
 	this.escoger_primera_tabla();
 }
+
+Controlador_tablas.prototype.obtener_celda_coordenadas=function(_x, _y) {
+
+	return this.obtener_tabla_actual().obtener_celda_coordenadas(_x, _y);
+}

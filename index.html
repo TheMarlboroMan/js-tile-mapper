@@ -15,14 +15,15 @@
 	<script type="text/javascript" src="js/controlador_input.js"></script>
 	<script type="text/javascript" src="js/controlador_sets.js"></script>
 	<script type="text/javascript" src="js/set_tiles.js"></script>
+	<script type="text/javascript" src="js/caja_atributos_celda.js"></script>
 </head>
 <body>
 	<style style="text/css" id="estilos_inline"></style>
 
 	<div id="tablas"></div>
 
-	<div id="herramientas" class="pop_up oculto">
-		<div id="herramientas_generales" class="ui_form_generico">
+	<div id="herramientas" class="pop_up oculto ui_form_generico">
+		<div id="herramientas_generales">
 
 			<div>
 				<input type="button" class="btn" id="btn_importar" value="Importar" />
@@ -42,7 +43,7 @@
 			<ul id="listado_tablas"></ul>
 		</div>
 
-		<div id="herramientas_tabla" class="ui_form_generico">
+		<div id="herramientas_tabla">
 			<div><label for="select_set">Set: <select id="select_set"></select></label></div>
 			<div><label for="input_opacidad">Opacidad: <input class="txt" type="text" id="input_opacidad" value="100" /></label></div>
 			<ul id="listado_tiles"></ul>
@@ -50,30 +51,40 @@
 	</div>
 
 	<div id="caja_exportar" class="oculto ui_form_generico pop_up">
-		<input class="btn" type="button" value="&times;" id="btn_cerrar_exportar"/>
+		<input class="btn cerrar" type="button" value="&times;" id="btn_cerrar_exportar"/>
 		<textarea id="p_exportar"></textarea>
 		<label>
 			<input type="checkbox" checked="true" id="check_ignorar_tipo_cero"> Ignorar celdas con tipo "0"
 		</label>
-		<input class="btn" type="button" id="btn_exportar_json" value="Exportar JSON" />
+		<input class="btn ok" type="button" id="btn_exportar_json" value="Exportar JSON" />
 	</div>
 
 	<div id="caja_importar" class="oculto ui_form_generico pop_up">
-		<input class="btn" type="button" value="&times;" id="btn_cerrar_importar"/>
+		<input class="btn cerrar" type="button" value="&times;" id="btn_cerrar_importar"/>
 		<textarea class="txt" name="texto" id="textarea_importar"></textarea>
-		<input class="btn" type="button" id="btn_importar_json" value="Importar JSON" />
+		<input class="btn ok" type="button" id="btn_importar_json" value="Importar JSON" />
 	</div>
 
 	<div id="caja_nuevo_set" class="oculto ui_form_generico pop_up">
-
 		<input type="file" id="file_nuevo_set" />
 		<label>Nombre: <input class="txt" type="text" id="input_title" value="" /></label>
 		<label>Clave: <input class="txt" type="text" id="input_style" value="" /></label>
 		<label>Celda W: <input class="txt" type="text" id="set_celda_w" value="32" /></label>
 		<label>Celda H: <input class="txt" type="text" id="set_celda_h" value="32" /></label>
 
-		<input class="btn" type="button" value="&times;" id="btn_cerrar_nuevo_set"/>
-		<input class="btn" type="button" id="btn_crear_set" value="Crear set" />
+		<input class="btn cerrar" type="button" value="&times;" id="btn_cerrar_nuevo_set"/>
+		<input class="btn ok" type="button" id="btn_crear_set" value="Crear set" />
+	</div>
+
+	<div id="caja_atributos_celda" class="oculto ui_form_generico pop_up">
+
+		<div id="interface_atributos">
+			<input type="button" value="+" id="btn_nuevo_atributo_celda" />
+			<ul id="listado_atributos"></ul>
+		</div>
+
+		<input class="btn cerrar" type="button" value="&times;" id="btn_cerrar_atributos_celda"/>
+		<input class="btn ok" type="button" id="btn_guardar_atributos_celda" value="Guardar" />
 	</div>
 
 	<div id="navegacion"></div>

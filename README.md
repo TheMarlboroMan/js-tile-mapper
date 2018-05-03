@@ -21,9 +21,9 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
-- Add custom attributes for cells.
 - Add optional data to the maps, a form in the export. 
 - Import optional data too. 
+- Import level from file (instead of copy / paste)
 - Do it ECMA6 style.
 	- We could get rid of a lot of var aquello=this;.
 
@@ -37,6 +37,7 @@ A refactor was started in late April, 2018, but removing global state was way to
 - Erase the cell translations.
 - Erase order. It does nothing.
 - Separate table view from model.
+- Add custom attributes for cells.
 
 # Credits:
 
