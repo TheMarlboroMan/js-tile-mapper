@@ -21,7 +21,7 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 
 	if(evento.ctrlKey) {
 		let celda=CT.obtener_celda_coordenadas(x, y);
-		CAC.mostrar(celda);
+		CA.mostrar(celda);
 	}
 
 	//Trazar líneas...

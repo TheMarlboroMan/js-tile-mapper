@@ -11,7 +11,7 @@ window.onload=function() {
 		C_IMP=new Caja_importacion();
 		C_NS=new Caja_nuevo_set();
 		CI=new Controlador_input();
-		CAC=new Caja_atributos_celda();
+		CA=new Caja_atributos();
 		H=new Herramientas_tabla();
 	
 		H.recargar_selector_tiles();

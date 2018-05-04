@@ -15,7 +15,10 @@
 	<script type="text/javascript" src="js/controlador_input.js"></script>
 	<script type="text/javascript" src="js/controlador_sets.js"></script>
 	<script type="text/javascript" src="js/set_tiles.js"></script>
-	<script type="text/javascript" src="js/caja_atributos_celda.js"></script>
+	<script type="text/javascript" src="js/caja_atributos.js"></script>
+	<script type="text/javascript" src="js/atributo.js"></script>
+	<script type="text/javascript" src="js/mediador_atributos.js"></script>
+	<script type="text/javascript" src="js/celda.js"></script>
 </head>
 <body>
 	<style style="text/css" id="estilos_inline"></style>
@@ -76,23 +79,23 @@
 		<input class="btn ok" type="button" id="btn_crear_set" value="Crear set" />
 	</div>
 
-	<div id="caja_atributos_celda" class="oculto ui_form_generico pop_up">
+	<div id="caja_atributos" class="oculto ui_form_generico pop_up">
 
 		<div id="interface_atributos">
-			<input type="button" value="+" id="btn_nuevo_atributo_celda" />
+			<input type="button" value="+" id="btn_nuevo_atributo" />
 			<ul id="listado_atributos"></ul>
 		</div>
 
-		<input class="btn cerrar" type="button" value="&times;" id="btn_cerrar_atributos_celda"/>
-		<input class="btn ok" type="button" id="btn_guardar_atributos_celda" value="Guardar" />
+		<input class="btn cerrar" type="button" value="&times;" id="btn_cerrar_atributos"/>
+		<input class="btn ok" type="button" id="btn_guardar_atributos" value="Guardar" />
 	</div>
 
 	<div id="navegacion"></div>
 
 	<div id="ayuda">
-		Espacio para men&uacute;. <br/ >
-		MAY+Click para l&iacute;neas. <br />
-		CTRL+Click para atributos.
+		Espacio: men&uacute;. <br/ >
+		MAY+Click: l&iacute;neas. <br />
+		CTRL+Click: atributos de celda.
 	</div>
 </body>
 </html>

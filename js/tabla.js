@@ -1,10 +1,3 @@
-function Celda(_x, _y, _t) {
-	this.x=_x;
-	this.y=_y;
-	this.tipo=_t;
-	this.atributos={};
-}
-
 function Tabla(w, h) {
 	this.DOM_tabla=null;
 	this.DOM_rep_listado=null;
