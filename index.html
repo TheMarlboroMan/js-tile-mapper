@@ -9,7 +9,7 @@
 	<script type="text/javascript" src="js/caja_exportacion.js"></script>
 	<script type="text/javascript" src="js/caja_importacion.js"></script>
 	<script type="text/javascript" src="js/caja_nuevo_set.js"></script>
-	<script type="text/javascript" src="js/controlador_tablas.js"></script>
+	<script type="text/javascript" src="js/mapa.js"></script>
 	<script type="text/javascript" src="js/tabla.js"></script>
 	<script type="text/javascript" src="js/herramientas_tabla.js"></script>
 	<script type="text/javascript" src="js/controlador_input.js"></script>
@@ -32,6 +32,7 @@
 				<input type="button" class="btn" id="btn_importar" value="Importar" />
 				<input type="button" class="btn" id="btn_exportar" value="Exportar" />
 				<input type="button" class="btn" id="btn_nuevo_set" value="Nuevo set" />
+				<input type="button" class="btn" id="btn_atributos_mapa" value="Atributos" />
 				<input type="button" class="btn" id="btn_nueva_tabla" value="Nueva tabla" />
 				<input type="button" class="btn" id="btn_eliminar_tabla" value="Borrar" />
 				<input type="button" class="btn" id="btn_tabla_anterior" value="Anterior" />
@@ -65,6 +66,7 @@
 	<div id="caja_importar" class="oculto ui_form_generico pop_up">
 		<input class="btn cerrar" type="button" value="&times;" id="btn_cerrar_importar"/>
 		<textarea class="txt" name="texto" id="textarea_importar"></textarea>
+		<input type="file" id="file_importar" />
 		<input class="btn ok" type="button" id="btn_importar_json" value="Importar JSON" />
 	</div>
 
@@ -95,7 +97,7 @@
 	<div id="ayuda">
 		Espacio: men&uacute;. <br/ >
 		MAY+Click: l&iacute;neas. <br />
-		CTRL+Click: atributos de celda.
+		CTRL+Click: atributos.
 	</div>
 </body>
 </html>

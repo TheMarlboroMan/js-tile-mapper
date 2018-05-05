@@ -20,7 +20,7 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 	let y=parseInt(celda.getAttribute('data-y'), 10);
 
 	if(evento.ctrlKey) {
-		let celda=CT.obtener_celda_coordenadas(x, y);
+		let celda=M.obtener_celda_coordenadas(x, y);
 		CA.mostrar(celda);
 	}
 
@@ -39,10 +39,10 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 					var ini=_dim < _ultimo_click ? _dim : _ultimo_click;
 					var fin=_dim > _ultimo_click ? _dim : _ultimo_click;
 					while(ini <= fin) {
-						if(_hor) 	CT.actualizar_modelo(ini++, y, c);
-						else 		CT.actualizar_modelo(x, ini++, c);
+						if(_hor) 	M.actualizar_modelo(ini++, y, c);
+						else 		M.actualizar_modelo(x, ini++, c);
 					}
-					CT.volcar_modelo_en_DOM();
+					M.volcar_modelo_en_DOM();
 				}
 
 				if(x==this.ULTIMO_CLICK_X) {
@@ -56,8 +56,8 @@ Controlador_input.prototype.click_celda=function(event, celda) {
 	}
 	//Regular click.
 	else {
-		CT.actualizar_modelo(x, y, c);
-		CT.volcar_modelo_en_DOM(); //Killing flies with a flak cannon: just one changed, all are refreshed XD.
+		M.actualizar_modelo(x, y, c);
+		M.volcar_modelo_en_DOM(); //Killing flies with a flak cannon: just one changed, all are refreshed XD.
 	}
 
 	this.ULTIMO_CLICK_X=parseInt(celda.getAttribute('data-x'), 10);

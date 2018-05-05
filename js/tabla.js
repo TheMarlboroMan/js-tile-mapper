@@ -65,7 +65,7 @@ Tabla.prototype.crear_DOM=function() {
 
 	//También, añadir el tema del listado...
 	this.DOM_rep_listado=document.createElement('li');
-	this.listado_click_handler=this.DOM_rep_listado.addEventListener('click', () => {CT.seleccionar_tabla(this);}, true);
+	this.listado_click_handler=this.DOM_rep_listado.addEventListener('click', () => {M.seleccionar_tabla(this);}, true);
 
 	document.getElementById('tablas').appendChild(this.DOM_tabla);
 	document.getElementById('listado_tablas').appendChild(this.DOM_rep_listado);

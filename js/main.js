@@ -1,5 +1,5 @@
 var CI=null;
-var CT=null;
+var M=null;
 var CS=null;
 var H=null;
 var C_IMP=null;
@@ -16,8 +16,7 @@ window.onload=function() {
 	
 		H.recargar_selector_tiles();
 		H.recargar_listado_tiles(0);
-		CT=new Controlador_tablas();
-		CT.iniciar();
+		M=new Mapa();
 	}
 
 	CS=new Controlador_sets();

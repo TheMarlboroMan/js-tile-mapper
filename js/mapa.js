@@ -1,10 +1,25 @@
-function Controlador_tablas()
-{
+function Mapa() {
+
 	var TABLA_ACTUAL=null;
 	var TABLAS=Array();
+	var atributos={};
 
 	//All these functions are here so we can access the private variables above.
 
+	this.obtener_atributos_para_mediador=() => {
+		let resultado=[];
+
+		for(let i in atributos) {
+			resultado.push(new Atributo(i, atributos[i], null));
+		}
+
+		return resultado;
+	}
+
+	this.limpiar_atributos_para_mediador=() => {atributos={};}
+	this.asignar_atributo_para_mediador=(_clave, _valor) => {atributos[_clave]=_valor;}
+	this.obtener_atributos=() => {return atributos;}
+	this.establecer_atributos=(_val) => {atributos=_val;}
 	this.insertar_tabla=(t) => {TABLAS.push(t);}
 	this.seleccionar_tabla=(t) => {
 		if(TABLA_ACTUAL) TABLA_ACTUAL.quitar_actual();
@@ -16,12 +31,10 @@ function Controlador_tablas()
 	this.escoger_primera_tabla=() => {this.seleccionar_tabla(TABLAS[0]);}
 	this.obtener_tabla_actual=() => {return TABLA_ACTUAL;}
 	this.obtener_array_tablas=() => {return TABLAS;}
-	this.obtener_total_tablas=() => {return TABLAS.length;}
 
 	this.eliminar_tabla_actual=() => {
 
-		if(this.obtener_total_tablas() > 1)
-		{
+		if(TABLAS.length) {
 			var indice=TABLAS.indexOf(TABLA_ACTUAL);
 			if(indice==TABLAS.length-1) return;
 			else 
@@ -52,17 +65,20 @@ function Controlador_tablas()
 		if(indice==0 || indice==-1) return;
 		else this.seleccionar_tabla(TABLAS[indice-1]);
 	}
+
+	this.nueva_tabla();
+	this.escoger_primera_tabla();
 }
 
-Controlador_tablas.prototype.volcar_modelo_en_DOM=function() {
+Mapa.prototype.volcar_modelo_en_DOM=function() {
 	return this.obtener_tabla_actual().volcar_modelo_en_DOM();
 }
 
-Controlador_tablas.prototype.actualizar_modelo=function(_x, _y, _tipo) {
+Mapa.prototype.actualizar_modelo=function(_x, _y, _tipo) {
 	this.obtener_tabla_actual().actualizar_modelo(_x, _y, _tipo);
 }
 
-Controlador_tablas.prototype.nueva_tabla=function() {
+Mapa.prototype.nueva_tabla=function() {
 
 	var ancho=H.obtener_w();
 	var alto=H.obtener_h();
@@ -74,20 +90,20 @@ Controlador_tablas.prototype.nueva_tabla=function() {
 	this.seleccionar_tabla(T);
 }
 
-Controlador_tablas.prototype.cambiar_opacidad_tabla_actual=function(val) {
+Mapa.prototype.cambiar_opacidad_tabla_actual=function(val) {
 	this.obtener_tabla_actual().cambiar_opacidad(val);
 }
 
-Controlador_tablas.prototype.redimensionar_tablas=function(w, h) {
+Mapa.prototype.redimensionar_tablas=function(w, h) {
 	this.obtener_array_tablas().forEach((_item) => {
 		_item.redimensionar(w, h);
 	});
 }
 
-Controlador_tablas.prototype.generar_json_exportacion_tablas=function(_ignore_zero) {
+Mapa.prototype.generar_json_exportacion_tablas=function(_ignore_zero) {
 
 	var resultado={
-		'total' : this.obtener_total_tablas(),
+		'atributos' : this.obtener_atributos(),
 		'tablas' : [],
 	};
 
@@ -98,28 +114,24 @@ Controlador_tablas.prototype.generar_json_exportacion_tablas=function(_ignore_ze
 	return JSON.stringify(resultado);
 }
 
-Controlador_tablas.prototype.importar_json=function(texto) {
+Mapa.prototype.importar_json=function(texto) {
 
-	//Eliminar todas las tablas...
 	this.destruir_todas_las_tablas();
-
 	var datos=JSON.parse(texto);
 
-	var total=datos.total;
-	var aquello=this;
+	if(undefined!==datos.atributos) {
+		this.establecer_atributos(datos.atributos)
+	}
 
-	datos.tablas.forEach(function(_item) {
-		aquello.nueva_tabla();
-		aquello.obtener_tabla_actual().importar_json(_item);
-	});
+	if(undefined!==datos.tablas) {
+		datos.tablas.forEach((_item) => {
+			this.nueva_tabla();
+			this.obtener_tabla_actual().importar_json(_item);
+		});
+	}
 }
 
-Controlador_tablas.prototype.iniciar=function() {
-	this.nueva_tabla();
-	this.escoger_primera_tabla();
-}
-
-Controlador_tablas.prototype.obtener_celda_coordenadas=function(_x, _y) {
+Mapa.prototype.obtener_celda_coordenadas=function(_x, _y) {
 
 	return this.obtener_tabla_actual().obtener_celda_coordenadas(_x, _y);
 }

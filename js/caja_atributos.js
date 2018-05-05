@@ -13,9 +13,8 @@ function Caja_atributos() {
 	}, true);
 
 	document.getElementById('btn_guardar_atributos').addEventListener('click', () => {
-		//Refrescar tabla...
 		this.mediador.asignar_atributos(this.atributos);
-		CT.volcar_modelo_en_DOM();
+		M.volcar_modelo_en_DOM(); //May or may not be neccesary.
 		this.ejecutar_limpieza();
 
 	}, true);
@@ -35,8 +34,9 @@ Caja_atributos.prototype.ejecutar_limpieza=function() {
 
 Caja_atributos.prototype.mostrar=function(_item) {
 
-	this.mediador.asignar_atribuible(_item);
+	this.mediador_atributos.limpiar();
 	this.limpiar();
+	this.mediador.asignar_atribuible(_item);
 	this.DOM_caja.classList.remove('oculto');
 	this.cargar_datos();
 }

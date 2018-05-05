@@ -1,59 +1,56 @@
 function Herramientas_tabla() {
+
 	this.DOM_contenedor=document.getElementById('herramientas');
 	this.input_w=document.getElementById('redim_w');
 	this.input_h=document.getElementById('redim_h');
 	this.lista_tiles=document.getElementById('listado_tiles');
 	this.select_set=document.getElementById('select_set');
-	this.btn_nueva_tabla=document.getElementById('btn_nueva_tabla');
-	this.btn_eliminar_tabla=document.getElementById('btn_eliminar_tabla');
 	this.input_opacidad=document.getElementById('input_opacidad');
-	this.btn_nuevo_set=document.getElementById('btn_nuevo_set');
-	this.btn_tabla_anterior=document.getElementById('btn_tabla_anterior');
-	this.btn_tabla_siguiente=document.getElementById('btn_tabla_siguiente');
-	this.btn_redimensionar=document.getElementById('btn_redimensionar');
-	this.btn_rejilla=document.getElementById('btn_rejilla');
-	this.btn_importar=document.getElementById('btn_importar');
-	this.btn_exportar=document.getElementById('btn_exportar');
 
-	var aquello=this;
-
-	this.establecer_wh=function(w, h) {
-		aquello.input_w.value=w;
-		aquello.input_h.value=h;
+	this.establecer_wh=(w, h) => {
+		this.input_w.value=w;
+		this.input_h.value=h;
 	}
 
-	this.btn_nuevo_set.onclick=function() {
+	document.getElementById('btn_nuevo_set').addEventListener('click', () => {
 		C_IMP.ocultar();
 		C_EXP.ocultar();
 		C_NS.mostrar();
-	}
+	}, true);
 
-	this.btn_redimensionar.onclick=function() {CT.redimensionar_tablas(aquello.obtener_w(), aquello.obtener_h());}
-	this.btn_exportar.onclick=function() {
+	document.getElementById('btn_redimensionar').addEventListener('click', () => {
+		M.redimensionar_tablas(this.obtener_w(), this.obtener_h());
+	}, true);
+
+	document.getElementById('btn_exportar').addEventListener('click', () => {
 		C_IMP.ocultar();
 		C_NS.ocultar();
 		C_EXP.mostrar();
-	}
-	this.btn_importar.onclick=function() {
+	}, true);
+
+	document.getElementById('btn_importar').addEventListener('click', () => {
 		C_EXP.ocultar();
 		C_NS.ocultar();
 		C_IMP.vaciar();
 		C_IMP.mostrar();
-	}
-	this.btn_tabla_anterior.onclick=function() {CT.tabla_anterior();}
-	this.btn_tabla_siguiente.onclick=function() {CT.tabla_siguiente();}
-	this.btn_nueva_tabla.onclick=function() {CT.nueva_tabla();}
-	this.btn_eliminar_tabla.onclick=function() {CT.eliminar_tabla_actual();}
+	}, true);
+	
+	document.getElementById('btn_tabla_anterior').addEventListener('click', () => {M.tabla_anterior();}, true);
+	document.getElementById('btn_tabla_siguiente').addEventListener('click', () => {M.tabla_siguiente();}, true);
+	document.getElementById('btn_nueva_tabla').addEventListener('click', () => {M.nueva_tabla();}, true);
+	document.getElementById('btn_eliminar_tabla').addEventListener('click', () => {M.eliminar_tabla_actual();}, true);
+	document.getElementById('btn_atributos_mapa').addEventListener('click', () => {CA.mostrar(M);}, true);
 
-	this.input_opacidad.onchange=function() {CT.cambiar_opacidad_tabla_actual(parseInt(aquello.input_opacidad.value, 10));}
+	this.input_opacidad.addEventListener('change', () => {
+		M.cambiar_opacidad_tabla_actual(parseInt(this.input_opacidad.value, 10));
+	}, true);
 
-	this.select_set.onchange=function()
-	{
-		var indice=aquello.select_set.selectedIndex;
-		aquello.recargar_listado_tiles(indice);
+	this.select_set.addEventListener('change', () => {
+		var indice=this.select_set.selectedIndex;
+		this.recargar_listado_tiles(indice);
 		var s=CS.obtener_set_por_indice(indice);
-		CT.obtener_tabla_actual().escoger_set(s);
-	}
+		M.obtener_tabla_actual().escoger_set(s);
+	}, true);
 
 	var tipo_actual=0;
 
@@ -71,7 +68,6 @@ Herramientas_tabla.prototype.mostrar=function(event) {
 }
 
 Herramientas_tabla.prototype.ocultar=function(){this.DOM_contenedor.classList.add('oculto');}
-
 Herramientas_tabla.prototype.obtener_w=function(){return parseInt(this.input_w.value, 10);}
 Herramientas_tabla.prototype.obtener_h=function(){return parseInt(this.input_h.value, 10);}
 Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_selector_tiles(this.select_set);}

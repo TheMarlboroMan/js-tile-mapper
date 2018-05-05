@@ -9,11 +9,10 @@ function Caja_exportacion()
 	this.vaciar=function() {DOM_p.innerHTML='';}
 	this.rellenar=function(texto) {DOM_p.innerHTML=texto;}
 
-	//TODO: Use real handlers.
-	document.getElementById('btn_exportar_json').onclick=() => {this.exportar_json(DOM_check_ignorar_tipo_cero.checked)};
-	document.getElementById('btn_cerrar_exportar').onclick=() => {this.ocultar(); this.vaciar();}
+	document.getElementById('btn_exportar_json').addEventListener('click', () => {this.exportar_json(DOM_check_ignorar_tipo_cero.checked)}, true);
+	document.getElementById('btn_cerrar_exportar').addEventListener('click', () => {this.ocultar(); this.vaciar();}, true);
 }
 
 Caja_exportacion.prototype.exportar_json=function(_ignore_zero) {
-	C_EXP.rellenar(CT.generar_json_exportacion_tablas(_ignore_zero));
+	C_EXP.rellenar(M.generar_json_exportacion_tablas(_ignore_zero));
 }
