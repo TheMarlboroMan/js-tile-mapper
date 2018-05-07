@@ -66,6 +66,35 @@ function Mapa() {
 		else this.seleccionar_tabla(TABLAS[indice-1]);
 	}
 
+
+	//TODO: Outrageous repetition of code.
+	//	- Not only the swap code, but also the checking code.
+	this.tabla_actual_frente=() => {
+		let indice=TABLAS.indexOf(TABLA_ACTUAL);
+		if(indice==TABLAS.length-1 || indice==-1) return;
+	
+		//TODO: This is working, but the <li> are not reordered,
+		//so it looks like it's not working!.
+		TABLA_ACTUAL=null;
+		let nuevo_indice=indice+1;
+		let a_mover=TABLAS[indice];
+		TABLAS[indice]=TABLAS[nuevo_indice];
+		TABLAS[nuevo_indice]=a_mover;
+		this.seleccionar_tabla(TABLAS[nuevo_indice]);
+	}
+
+	this.tabla_actual_atras=() => {
+		var indice=TABLAS.indexOf(TABLA_ACTUAL);
+		if(indice==0 || indice==-1) return;
+
+		TABLA_ACTUAL=null;
+		let nuevo_indice=indice-1;
+		let a_mover=TABLAS[indice];
+		TABLAS[indice]=TABLAS[nuevo_indice];
+		TABLAS[nuevo_indice]=a_mover;
+		this.seleccionar_tabla(TABLAS[nuevo_indice]);
+	}
+
 	this.nueva_tabla();
 	this.escoger_primera_tabla();
 }

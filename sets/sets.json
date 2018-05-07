@@ -19,6 +19,11 @@
 			"css" : "fondo16x16_map",
 			"src":"sets/background-16-ordered.png",
 			"cw":16, "ch":16
+		},
+		{"titulo":"Objetos 16 x 16",
+			"css" : "things16x16",
+			"src":"sets/things16x16.png",
+			"cw":16, "ch":16
 		}
 	]
 }

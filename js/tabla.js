@@ -64,10 +64,13 @@ Tabla.prototype.crear_DOM=function() {
 	}
 
 	//También, añadir el tema del listado...
+	//TODO: This should be under control of the mapa. class.
 	this.DOM_rep_listado=document.createElement('li');
 	this.listado_click_handler=this.DOM_rep_listado.addEventListener('click', () => {M.seleccionar_tabla(this);}, true);
 
 	document.getElementById('tablas').appendChild(this.DOM_tabla);
+
+	//TODO... This needs to be done, again...
 	document.getElementById('listado_tablas').appendChild(this.DOM_rep_listado);
 }
 
@@ -189,20 +192,3 @@ Tabla.prototype.cambiar_opacidad=function(val) {
 	this.opacidad=val;
 	this.DOM_tabla.style.opacity=this.opacidad / 100;
 }
-
-/*
-//TODO: Erase when not needed.
-
-Tabla.prototype.obtener_td_coordenadas=function(x, y) {
-
-	var row=this.DOM_tabla.rows[y];
-	if(!row) {
-		return null;
-	}
-	else {
-		var celda=row.cells[x];
-		if(!celda) return null;
-		else return celda;
-	}
-}
-*/

@@ -12,6 +12,14 @@ function Herramientas_tabla() {
 		this.input_h.value=h;
 	}
 
+	document.getElementById('btn_tabla_frente').addEventListener('click', () => {
+		M.tabla_actual_frente();
+	}, true);
+
+	document.getElementById('btn_tabla_atras').addEventListener('click', () => {
+		M.tabla_actual_atras();
+	}, true);
+
 	document.getElementById('btn_nuevo_set').addEventListener('click', () => {
 		C_IMP.ocultar();
 		C_EXP.ocultar();

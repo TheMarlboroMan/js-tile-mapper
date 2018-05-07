@@ -34,7 +34,7 @@ Caja_atributos.prototype.ejecutar_limpieza=function() {
 
 Caja_atributos.prototype.mostrar=function(_item) {
 
-	this.mediador_atributos.limpiar();
+	this.mediador.limpiar();
 	this.limpiar();
 	this.mediador.asignar_atribuible(_item);
 	this.DOM_caja.classList.remove('oculto');

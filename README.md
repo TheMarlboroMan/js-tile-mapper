@@ -4,7 +4,7 @@ JS tile editor. A very simple distraction dated from long ago.
 
 The original code is done in an old JS style, with lots of global state scattered throughout. 
 
-A refactor was started in late April, 2018, but removing global state was way too much of a headache, so the refactor focused on removing useless code and functionality and improving readability.
+A refactor was started in late April, 2018, but removing global state was way too much of a headache, so the refactor focused on removing useless code and functionality, making the codebase less redundant, shorter and improving readability.
 
 # FAQ:
 
@@ -19,15 +19,29 @@ A refactor was started in late April, 2018, but removing global state was way to
 - How do permanently add custom sets ? 
 	Check the assets/sets.json file. You can add sets here. "titulo" is a value for the selector, "css" is a name that must be unique and you can choose, "src" is the path to your tile file, "cw" and "ch" are cell width and height in pixels.
 
+- I added tiles to my tileset and now everything is scrambled!.
+	Yep, the tile manager assigns each tile a numeric value, and does so by measuring tiles left to right and top to bottom. If you are planning to add new tiles to your set, just extend the image vertically or relocate all tiles so they can keep their numeric values (left to right and top to bottom).
+
 - How can I delete an attribute from a cell?
 	Just edit the attributes and leave the name and value blank.
 
 - How am I supposed to add objects instead of tiles?.
 	You cannot do that with this project. The recommended way is to create another layer and use a tileset to represent your objects, in combination with cell attributes.
 
+- How can I export my map to a file?
+	Copy the contents of the export text and paste them into a file. Sorry.
+
 # TODO: 
 
-There's nothing left to do except fixing bugs as I find them.
+- Nor opacity nor tilesets are chosen on importing a map.
+- Delete table does not work.
+- Reorder (set as previous, set as next).
+- Do everything in English?
+- Fix how the tiles look pixel off...
+- Use "ESC" to close the current dialog.
+- Move all tiles left, right, up and so on... Mostly like "resize".
+
+If there are no lines above, then there's nothing left to do except fixing bugs as I find them.
 
 # DONE 
 
