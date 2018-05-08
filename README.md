@@ -33,9 +33,7 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
-- Nor opacity nor tilesets are chosen on importing a map.
 - Delete table does not work.
-- Reorder (set as previous, set as next).
 - Do everything in English?
 - Fix how the tiles look pixel off...
 - Use "ESC" to close the current dialog.
@@ -58,6 +56,8 @@ If there are no lines above, then there's nothing left to do except fixing bugs 
 - Import optional data too.
 - Use arrow functions to preserve class scope.
 - Import level from file (instead of copy / paste)
+- Reorder tables (set as previous, set as next).
+- Nor opacity nor tilesets are chosen on importing a map.
 
 # Credits:
 

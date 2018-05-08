@@ -13,11 +13,11 @@ function Herramientas_tabla() {
 	}
 
 	document.getElementById('btn_tabla_frente').addEventListener('click', () => {
-		M.tabla_actual_frente();
+		M.reordenar_tabla_actual(1);
 	}, true);
 
 	document.getElementById('btn_tabla_atras').addEventListener('click', () => {
-		M.tabla_actual_atras();
+		M.reordenar_tabla_actual(-1);
 	}, true);
 
 	document.getElementById('btn_nuevo_set').addEventListener('click', () => {
@@ -43,8 +43,8 @@ function Herramientas_tabla() {
 		C_IMP.mostrar();
 	}, true);
 	
-	document.getElementById('btn_tabla_anterior').addEventListener('click', () => {M.tabla_anterior();}, true);
-	document.getElementById('btn_tabla_siguiente').addEventListener('click', () => {M.tabla_siguiente();}, true);
+	document.getElementById('btn_tabla_anterior').addEventListener('click', () => {M.escoger_tabla(-1);}, true);
+	document.getElementById('btn_tabla_siguiente').addEventListener('click', () => {M.escoger_tabla(1);}, true);
 	document.getElementById('btn_nueva_tabla').addEventListener('click', () => {M.nueva_tabla();}, true);
 	document.getElementById('btn_eliminar_tabla').addEventListener('click', () => {M.eliminar_tabla_actual();}, true);
 	document.getElementById('btn_atributos_mapa').addEventListener('click', () => {CA.mostrar(M);}, true);
@@ -82,7 +82,7 @@ Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_sel
 
 Herramientas_tabla.prototype.cargar_valores_de_tabla=function(t) {
 	this.input_opacidad.value=t.opacidad;
-	this.select_set.value=t.titulo_set;
+	this.select_set.value=t.css_set;
 }
 
 Herramientas_tabla.prototype.recargar_listado_tiles=function(indice) {

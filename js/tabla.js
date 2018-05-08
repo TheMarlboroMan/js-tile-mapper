@@ -1,6 +1,5 @@
 function Tabla(w, h) {
 	this.DOM_tabla=null;
-	this.DOM_rep_listado=null;
 	this.W=w;
 	this.H=h;
 	this.css_set='';
@@ -30,10 +29,7 @@ Tabla.prototype.crear_DOM=function() {
 
 	if(this.DOM_tabla) {
 		this.DOM_tabla.parentNode.removeChild(this.DOM_tabla);
-		this.DOM_rep_listado.parentNode.removeChild(this.DOM_rep_listado);
-
 		this.DOM_tabla=null;
-		this.DOM_rep_listado=null;
 	}
 
 	this.DOM_tabla=document.createElement('table');
@@ -63,15 +59,7 @@ Tabla.prototype.crear_DOM=function() {
 		++y;
 	}
 
-	//También, añadir el tema del listado...
-	//TODO: This should be under control of the mapa. class.
-	this.DOM_rep_listado=document.createElement('li');
-	this.listado_click_handler=this.DOM_rep_listado.addEventListener('click', () => {M.seleccionar_tabla(this);}, true);
-
 	document.getElementById('tablas').appendChild(this.DOM_tabla);
-
-	//TODO... This needs to be done, again...
-	document.getElementById('listado_tablas').appendChild(this.DOM_rep_listado);
 }
 
 Tabla.prototype.volcar_modelo_en_DOM=function() {
@@ -109,7 +97,6 @@ Tabla.prototype.destruir=function() {
 
 	this.DOM_tabla.removeEventListener('click', this.tabla_click_handler, true);
 	this.DOM_tabla.removeEventListener('mouseover', this.tabla_over_handler, true);
-	this.DOM_rep_listado.removeEventListener('click', this.listado_click_handler, true);
 
 	this.tabla_click_handler=null;
 	this.tabla_over_handler=null;
@@ -117,7 +104,6 @@ Tabla.prototype.destruir=function() {
 
 	this.modelo.length=0;
 	this.DOM_tabla.parentNode.removeChild(this.DOM_tabla);
-	this.DOM_rep_listado.parentNode.removeChild(this.DOM_rep_listado);
 }
 
 Tabla.prototype.redimensionar=function(w, h) {
@@ -134,7 +120,6 @@ Tabla.prototype.redimensionar=function(w, h) {
 
 Tabla.prototype.importar_json=function(datos) {
 
-	this.cambiar_opacidad(datos.opacidad);
 	this.redimensionar(datos.w, datos.h);
 
 	H.establecer_wh(datos.w, datos.h);
@@ -146,7 +131,9 @@ Tabla.prototype.importar_json=function(datos) {
 	});
 
 	this.volcar_modelo_en_DOM();
+
 	this.escoger_set(CS.obtener_set_por_css(datos.set));
+	this.cambiar_opacidad(datos.opacidad);
 }
 
 Tabla.prototype.exportar_json=function(_ignore_zero) {
@@ -180,12 +167,10 @@ Tabla.prototype.escoger_set=function(set) {
 
 Tabla.prototype.quitar_actual=function() {
 	this.DOM_tabla.classList.remove('actual');
-	this.DOM_rep_listado.classList.remove('actual');
 }
 
 Tabla.prototype.escoger_actual=function() {
 	this.DOM_tabla.classList.add('actual');
-	this.DOM_rep_listado.classList.add('actual');
 }
 
 Tabla.prototype.cambiar_opacidad=function(val) {

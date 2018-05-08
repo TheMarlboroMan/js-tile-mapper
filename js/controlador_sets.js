@@ -51,9 +51,9 @@ Controlador_sets.prototype.recargar_selector_tiles=function(select) {
 		select.removeChild(select.childNodes[0]);
 	};
 
-	this.ARRAY_SETS.forEach((_item, _index) => {
+	this.ARRAY_SETS.forEach((_item) => {
 		var opt=document.createElement("option");
-		opt.value=_index;
+		opt.value=_item.classname;
 		opt.text=_item.titulo;
 		select.add(opt, null);
 	});
