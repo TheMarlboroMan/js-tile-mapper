@@ -33,6 +33,8 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
+- Changing table does not update the set selector.
+- Importing does not put the correct opacity into the table.
 - Delete table does not work.
 - Do everything in English?
 - Fix how the tiles look pixel off...

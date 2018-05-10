@@ -60,6 +60,7 @@ Tabla.prototype.crear_DOM=function() {
 	}
 
 	document.getElementById('tablas').appendChild(this.DOM_tabla);
+	this.DOM_tabla.className=this.css_set;
 }
 
 Tabla.prototype.volcar_modelo_en_DOM=function() {
@@ -107,15 +108,15 @@ Tabla.prototype.destruir=function() {
 }
 
 Tabla.prototype.redimensionar=function(w, h) {
+
 	this.W=w;
 	this.H=h;
-
 	//Original data is preserved.
 	let copia=this.modelo.map((_item) => {return _item;});
 	this.crear_modelo();
-
 	copia.forEach((_item) => {this.actualizar_modelo(_item.x, _item.y, _item.tipo, _item.atributos);});
 	this.crear_DOM();
+	this.volcar_modelo_en_DOM();
 }
 
 Tabla.prototype.importar_json=function(datos) {
