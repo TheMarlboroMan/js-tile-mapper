@@ -33,13 +33,11 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
-- Changing table does not update the set selector.
-- Importing does not put the correct opacity into the table.
-- Delete table does not work.
-- Do everything in English?
-- Fix how the tiles look pixel off...
+- Think about a way to export other than to copy the text to a file... Perhaps send to an url???
 - Use "ESC" to close the current dialog.
 - Move all tiles left, right, up and so on... Mostly like "resize".
+- Do everything in English?
+- Fix how the tiles look pixel off...
 
 If there are no lines above, then there's nothing left to do except fixing bugs as I find them.
 
@@ -60,6 +58,7 @@ If there are no lines above, then there's nothing left to do except fixing bugs 
 - Import level from file (instead of copy / paste)
 - Reorder tables (set as previous, set as next).
 - Nor opacity nor tilesets are chosen on importing a map.
+- Changing table does not update the set selector.
 
 # Credits:
 

@@ -15,7 +15,7 @@ window.onload=function() {
 		H=new Herramientas_tabla();
 	
 		H.recargar_selector_tiles();
-		H.recargar_listado_tiles(0);
+		H.recargar_listado_tiles(CS.obtener_set_por_indice(0).classname);
 		M=new Mapa();
 	}
 

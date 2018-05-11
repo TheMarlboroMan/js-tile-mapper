@@ -54,6 +54,7 @@ function Mapa() {
 		TABLA_ACTUAL=t;
 		TABLA_ACTUAL.escoger_actual();
 		H.cargar_valores_de_tabla(TABLA_ACTUAL);
+		//TODO: 
 	}
 
 	this.escoger_primera_tabla=() => {
@@ -85,14 +86,6 @@ function Mapa() {
 		TABLAS.length=0;
 		TABLA_ACTUAL=null;
 		this.recrear_selectores();
-	}
-
-	this.escoger_tabla=(_dir) => {
-		let indice=TABLAS.indexOf(TABLA_ACTUAL);
-		if( (_dir > 0 && indice==TABLAS.length-1) || (_dir < 0 && indice==0)) {
-			return;
-		}
-		this.seleccionar_tabla(TABLAS[indice+_dir]);
 	}
 
 	this.reordenar_tabla_actual=(_dir) => {

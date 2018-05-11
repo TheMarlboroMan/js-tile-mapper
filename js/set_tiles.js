@@ -32,11 +32,13 @@ Set_tiles.prototype.generar_cadena_css=function() {
 	return css_tablas+"\n"+css_herramientas;
 }
 
+//TODO: This should be responsibility of some other class...
 Set_tiles.prototype.rellenar_selector=function(ul) {
 
 	ul.className=this.classname;
 
 	function click_input(input, i) 	{
+		//TODO: Use real events.
 		input.onclick=function() {H.establecer_tipo_actual(i);}
 	}
 

@@ -43,8 +43,6 @@ function Herramientas_tabla() {
 		C_IMP.mostrar();
 	}, true);
 	
-	document.getElementById('btn_tabla_anterior').addEventListener('click', () => {M.escoger_tabla(-1);}, true);
-	document.getElementById('btn_tabla_siguiente').addEventListener('click', () => {M.escoger_tabla(1);}, true);
 	document.getElementById('btn_nueva_tabla').addEventListener('click', () => {M.nueva_tabla();}, true);
 	document.getElementById('btn_eliminar_tabla').addEventListener('click', () => {M.eliminar_tabla_actual();}, true);
 	document.getElementById('btn_atributos_mapa').addEventListener('click', () => {CA.mostrar(M);}, true);
@@ -54,10 +52,9 @@ function Herramientas_tabla() {
 	}, true);
 
 	this.select_set.addEventListener('change', () => {
-		var indice=this.select_set.selectedIndex;
-		this.recargar_listado_tiles(indice);
-		var s=CS.obtener_set_por_indice(indice);
-		M.obtener_tabla_actual().escoger_set(s);
+
+		this.recargar_listado_tiles(this.select_set.value);
+		M.obtener_tabla_actual().escoger_set(CS.obtener_set_por_css(this.select_set.value));
 	}, true);
 
 	var tipo_actual=0;
@@ -83,20 +80,18 @@ Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_sel
 Herramientas_tabla.prototype.cargar_valores_de_tabla=function(t) {
 	this.input_opacidad.value=t.opacidad;
 	this.select_set.value=t.css_set;
+	this.recargar_listado_tiles(t.css_set);
 }
 
-Herramientas_tabla.prototype.recargar_listado_tiles=function(indice) {
+Herramientas_tabla.prototype.recargar_listado_tiles=function(_css) {
 
-	var lis=this.lista_tiles.querySelectorAll('li');
+	//TODO: Use real events.
+	this.lista_tiles.querySelectorAll('li').forEach((_item) => {
+		_item.onclick=null;
+		_item.parentNode.removeChild(_item);
+	});
+	console.log(_css);
 
-	var l=lis.length;
-	var i=0;
-
-	while(i < l) lis[i++].onclick=null;
-	while(this.lista_tiles.childNodes.length) {
-		this.lista_tiles.removeChild(this.lista_tiles.firstChild);
-	}
-
-	var s=CS.obtener_set_por_indice(indice);
-	if(s) s.rellenar_selector(this.lista_tiles);
+	console.log(CS);
+	CS.obtener_set_por_css(_css).rellenar_selector(this.lista_tiles);
 }

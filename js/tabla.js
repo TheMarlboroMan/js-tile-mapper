@@ -160,6 +160,7 @@ Tabla.prototype.exportar_json=function(_ignore_zero) {
 }
 
 Tabla.prototype.escoger_set=function(set) {
+
 	if(set) {
 		this.css_set=set.classname;
 		this.DOM_tabla.className=this.css_set;
