@@ -44,7 +44,8 @@ body {background: #f0f0f0; font-family: monospace;}
 .ui_form_generico input[type="button"].cerrar {position: absolute; top: 10px; right: 10px;}
 .ui_form_generico input[type="button"].ok {position: absolute; bottom: 10px; left: 10px;}
 
-#caja_exportar textarea {width: 90%; height: 80%; margin: 10px auto; background: #000; color: #fff; font-family: monospace; overflow-y: scroll;}
+#caja_exportar textarea {width: 90%; height: 70%; margin: 10px auto; background: #000; color: #fff; font-family: monospace; overflow-y: scroll;}
+#caja_exportar a {text-decoration: none; color: #009;}
 #caja_importar textarea {width: 90%; height: 300px; margin: 10px auto; overflow-y: scroll;}
 
 #caja_atributos #interface_atributos {width: 80%; height: 300px; margin: auto; overflow-y: scroll; background: #000; position: relative;}  
