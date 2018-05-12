@@ -7,7 +7,7 @@ function Caja_exportacion()
 	this.mostrar=function(){DOM_caja.classList.remove('oculto');}
 	this.ocultar=function(){DOM_caja.classList.add('oculto');}
 	this.vaciar=function() {DOM_p.innerHTML='';}
-	this.rellenar=function(texto) {DOM_p.innerHTML=texto;}
+	this.rellenar=function(texto) {DOM_p.innerHTML=texto; DOM_p.select();}
 
 	document.getElementById('btn_exportar_json').addEventListener('click', () => {this.exportar_json(DOM_check_ignorar_tipo_cero.checked)}, true);
 	document.getElementById('btn_cerrar_exportar').addEventListener('click', () => {this.cerrar();}, true);

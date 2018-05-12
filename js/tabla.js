@@ -119,6 +119,25 @@ Tabla.prototype.redimensionar=function(w, h) {
 	this.volcar_modelo_en_DOM();
 }
 
+//!Dir is 0 left, 1 up, 2 right, 3 down.
+Tabla.prototype.trasladar=function(_dir) {
+
+	let plus_x=_dir==2 ? 1 : _dir==0 ? -1 : 0;
+	let plus_y=_dir==1 ? -1 : _dir==3 ? 1 : 0;
+
+	let copia=this.modelo.map((_item) => {return _item;});
+	this.crear_modelo();
+	copia.forEach((_item) => {
+		let x=_item.x + plus_x;
+		let y=_item.y + plus_y;
+
+		if(x >= 0 && x < this.W && y >=0 && y < this.H) {
+			this.actualizar_modelo(x, y, _item.tipo, _item.atributos);
+		}
+	});
+	this.volcar_modelo_en_DOM();
+}
+
 Tabla.prototype.importar_json=function(datos) {
 
 	this.redimensionar(datos.w, datos.h);

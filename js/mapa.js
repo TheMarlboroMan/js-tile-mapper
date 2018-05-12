@@ -47,7 +47,17 @@ function Mapa() {
 		this.recrear_selectores();
 	}
 
+	this.obtener_indice_tabla_actual=() => {
+		return TABLAS.indexOf(TABLA_ACTUAL);
+	};
+
+	this.seleccionar_tabla_por_indice=(_i) => {
+		if(_i<0 || _i >= TABLAS.length) return;
+		this.seleccionar_tabla(TABLAS[_i]);
+	}
+
 	this.seleccionar_tabla=(t) => {
+
 		selectores.forEach((_item) => {_item.desmarcar();});
 		selectores[TABLAS.indexOf(t)].marcar();
 
@@ -176,4 +186,10 @@ Mapa.prototype.importar_json=function(texto) {
 Mapa.prototype.obtener_celda_coordenadas=function(_x, _y) {
 
 	return this.obtener_tabla_actual().obtener_celda_coordenadas(_x, _y);
+}
+
+Mapa.prototype.trasladar=function(_dir) {
+	this.obtener_array_tablas().forEach((_item) => {
+		_item.trasladar(_dir);
+	});
 }

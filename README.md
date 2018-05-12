@@ -33,8 +33,6 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
-- Use "ESC" to close the current dialog: should be easy with listeners and subscribers.
-- Move all tiles left, right, up and so on... Mostly like "resize".
 - Think about a way to export other than to copy the text to a file... Perhaps send to an url???
 - Do everything in English?
 - Fix how the tiles look pixel off...
@@ -59,6 +57,8 @@ If there are no lines above, then there's nothing left to do except fixing bugs 
 - Reorder tables (set as previous, set as next).
 - Nor opacity nor tilesets are chosen on importing a map.
 - Changing table does not update the set selector.
+- Use "ESC" to close the current dialog: should be easy with listeners and subscribers.
+- Move all tiles left, right, up and so on... Mostly like "resize".
 
 # Credits:
 
