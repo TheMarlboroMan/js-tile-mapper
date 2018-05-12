@@ -63,16 +63,15 @@ function Herramientas_tabla() {
 	this.establecer_tipo_actual=function(v) {tipo_actual=v;}
 }
 
-Herramientas_tabla.prototype.intercambiar=function() {
-	if(this.DOM_contenedor.classList.contains('oculto')) this.mostrar();
-	else this.ocultar();
+Herramientas_tabla.prototype.es_visible=function() {
+	return !this.DOM_contenedor.classList.contains('oculto');
 }
 
 Herramientas_tabla.prototype.mostrar=function(event) {
 	this.DOM_contenedor.classList.remove('oculto');
 }
 
-Herramientas_tabla.prototype.ocultar=function(){this.DOM_contenedor.classList.add('oculto');}
+Herramientas_tabla.prototype.cerrar=function(){this.DOM_contenedor.classList.add('oculto');}
 Herramientas_tabla.prototype.obtener_w=function(){return parseInt(this.input_w.value, 10);}
 Herramientas_tabla.prototype.obtener_h=function(){return parseInt(this.input_h.value, 10);}
 Herramientas_tabla.prototype.recargar_selector_tiles=function() {CS.recargar_selector_tiles(this.select_set);}
@@ -90,8 +89,10 @@ Herramientas_tabla.prototype.recargar_listado_tiles=function(_css) {
 		_item.onclick=null;
 		_item.parentNode.removeChild(_item);
 	});
-	console.log(_css);
 
-	console.log(CS);
 	CS.obtener_set_por_css(_css).rellenar_selector(this.lista_tiles);
+}
+
+Herramientas_tabla.prototype.intercambiar_ayuda=function() {
+	document.getElementById('ayuda').classList.toggle('oculto');
 }

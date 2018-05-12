@@ -33,9 +33,9 @@ A refactor was started in late April, 2018, but removing global state was way to
 
 # TODO: 
 
-- Think about a way to export other than to copy the text to a file... Perhaps send to an url???
-- Use "ESC" to close the current dialog.
+- Use "ESC" to close the current dialog: should be easy with listeners and subscribers.
 - Move all tiles left, right, up and so on... Mostly like "resize".
+- Think about a way to export other than to copy the text to a file... Perhaps send to an url???
 - Do everything in English?
 - Fix how the tiles look pixel off...
 

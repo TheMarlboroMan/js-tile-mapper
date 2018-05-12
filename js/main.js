@@ -13,7 +13,9 @@ window.onload=function() {
 		CI=new Controlador_input();
 		CA=new Caja_atributos();
 		H=new Herramientas_tabla();
-	
+
+		CI.suscribir_dialogos([H, CA, C_EXP, C_IMP, C_NS]);
+
 		H.recargar_selector_tiles();
 		H.recargar_listado_tiles(CS.obtener_set_por_indice(0).classname);
 		M=new Mapa();

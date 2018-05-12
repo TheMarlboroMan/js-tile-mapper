@@ -9,13 +9,13 @@ function Caja_atributos() {
 	this.ocultar=function() {this.DOM_caja.classList.add('oculto');}
 
 	document.getElementById('btn_cerrar_atributos').addEventListener('click', () => {
-		this.ejecutar_limpieza();
+		this.cerrar();
 	}, true);
 
 	document.getElementById('btn_guardar_atributos').addEventListener('click', () => {
 		this.mediador.asignar_atributos(this.atributos);
 		M.volcar_modelo_en_DOM(); //May or may not be neccesary.
-		this.ejecutar_limpieza();
+		this.cerrar();
 
 	}, true);
 
@@ -24,7 +24,7 @@ function Caja_atributos() {
 	}, true);
 }
 
-Caja_atributos.prototype.ejecutar_limpieza=function() {
+Caja_atributos.prototype.cerrar=function() {
 
 	this.limpiar();
 	this.ocultar();

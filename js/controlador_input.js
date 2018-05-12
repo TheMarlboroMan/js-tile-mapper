@@ -3,12 +3,57 @@ function Controlador_input() {
 	this.ULTIMO_CLICK_X=-1;
 	this.ULTIMO_CLICK_Y=-1;
 
-	window.addEventListener('keydown', (event) => {
-		switch(event.keyCode) {
-			case 32: H.intercambiar(null); break; //Space to show/hide.
-			case 27: H.ocultar(); break; //Esc to hide tools.
+	this.dialogos=[];
+
+	let ocultar_dialogos=(_except) => {
+		this.dialogos.forEach((_item) => {
+			if(!_except || _except!=_item) {
+				_item.cerrar();
+			}
+		});
+	}
+
+	window.addEventListener('keydown', (_event) => {
+
+		console.log(_event);
+
+		switch(_event.keyCode) {
+			//F1
+			case 112: H.intercambiar_ayuda(); 
+			break
+			case 27: ocultar_dialogos(); break;
+			case 32: let v=H.es_visible();
+				ocultar_dialogos(); 
+				if(!v) H.mostrar();
+			break; 
+			case 76: ocultar_dialogos(C_IMP);
+				C_IMP.mostrar(); 
+			break;
+			case 83: ocultar_dialogos(C_EXP);
+				C_EXP.mostrar(); 
+			break;
+			case 78: M.nueva_tabla(); 
+			break;
+			case 65: ocultar_dialogos(CA);
+				CA.mostrar(M);
+			break;
 		}
 	}, true);
+}
+
+Controlador_input.prototype.suscribir_dialogos=function(_items) {
+
+	_items.forEach((_item) => {
+		if(-1!==this.dialogos.indexOf(_item)) {
+			throw new Error("Cannot subscribe the same item twice to dialogs");
+		}
+
+		if(undefined===_item.cerrar) {
+			throw new Error("Cannot subscribe to dialogs when close is not implemented");
+		}
+
+		this.dialogos.push(_item);
+	});
 }
 
 Controlador_input.prototype.click_celda=function(event, celda) {

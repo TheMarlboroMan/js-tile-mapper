@@ -50,11 +50,11 @@ function Mapa() {
 	this.seleccionar_tabla=(t) => {
 		selectores.forEach((_item) => {_item.desmarcar();});
 		selectores[TABLAS.indexOf(t)].marcar();
+
 		if(TABLA_ACTUAL) TABLA_ACTUAL.quitar_actual();
 		TABLA_ACTUAL=t;
 		TABLA_ACTUAL.escoger_actual();
 		H.cargar_valores_de_tabla(TABLA_ACTUAL);
-		//TODO: 
 	}
 
 	this.escoger_primera_tabla=() => {
@@ -89,6 +89,7 @@ function Mapa() {
 	}
 
 	this.reordenar_tabla_actual=(_dir) => {
+
 		let indice=TABLAS.indexOf(TABLA_ACTUAL);
 		if( (_dir > 0 && indice==TABLAS.length-1) || (_dir < 0 && indice==0)) {
 			return;

@@ -59,18 +59,10 @@ Controlador_sets.prototype.recargar_selector_tiles=function(select) {
 	});
 }
 
-Controlador_sets.prototype.obtener_set_por_css=function(t) {
+Controlador_sets.prototype.obtener_set_por_css=function(_css) {
 
-	//TODO: Do this idiomatically!.
-	let i=0;
-	while(i < this.ARRAY_SETS.length) {
-		if(this.ARRAY_SETS[i].classname==t) {
-			return this.ARRAY_SETS[i];
-		}
-		++i;
-	};
-
-	return null;
+	let f=this.ARRAY_SETS.find((_item) => {return _item.classname==_css;});
+	return undefined===f ? null : f;
 }
 
 Controlador_sets.prototype.obtener_set_por_indice=function(i) {
