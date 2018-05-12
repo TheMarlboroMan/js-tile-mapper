@@ -63,10 +63,6 @@ function Herramientas_tabla() {
 	this.establecer_tipo_actual=function(v) {tipo_actual=v;}
 }
 
-Herramientas_tabla.prototype.es_visible=function() {
-	return !this.DOM_contenedor.classList.contains('oculto');
-}
-
 Herramientas_tabla.prototype.mostrar=function(event) {
 	this.DOM_contenedor.classList.remove('oculto');
 }

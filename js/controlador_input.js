@@ -15,9 +15,30 @@ function Controlador_input() {
 
 	window.addEventListener('keydown', (_event) => {
 
-//		console.log(_event);
-
-		switch(_event.keyCode) {
+		if(_event.ctrlKey) {
+			switch(_event.keyCode) {
+				case 76: ocultar_dialogos(C_IMP);
+					C_IMP.mostrar(); 
+				break;
+				case 83: ocultar_dialogos(C_EXP);
+					C_EXP.mostrar(); 
+				break;
+				case 78: M.nueva_tabla(); 
+				break;
+				case 65: ocultar_dialogos(CA);
+					CA.mostrar(M);
+				break;
+				case 32: ocultar_dialogos(H); 
+					H.mostrar();
+				break; 
+				case 37:
+				case 38:
+				case 39:
+				case 40: M.trasladar(_event.keyCode-37);
+				break;
+			}
+		}
+		else switch(_event.keyCode) {
 			//F1
 			case 112: H.intercambiar_ayuda(); 
 			break
@@ -26,28 +47,6 @@ function Controlador_input() {
 			case 33: M.seleccionar_tabla_por_indice(M.obtener_indice_tabla_actual()-1);
 			break;
 			case 34: M.seleccionar_tabla_por_indice(M.obtener_indice_tabla_actual()+1);
-			break;
-			case 32: let v=H.es_visible();
-				ocultar_dialogos(); 
-				if(!v) H.mostrar();
-			break; 
-			case 76: ocultar_dialogos(C_IMP);
-				C_IMP.mostrar(); 
-			break;
-			case 83: ocultar_dialogos(C_EXP);
-				C_EXP.mostrar(); 
-			break;
-			case 78: M.nueva_tabla(); 
-			break;
-			case 65: ocultar_dialogos(CA);
-				CA.mostrar(M);
-			break;
-			case 37:
-			case 38:
-			case 39:
-			case 40: if(_event.ctrlKey) {
-					M.trasladar(_event.keyCode-37);
-				}
 			break;
 		}
 	}, true);
