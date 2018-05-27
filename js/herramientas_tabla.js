@@ -21,8 +21,9 @@ function Herramientas_tabla() {
 	}, true);
 
 	document.getElementById('btn_nuevo_set').addEventListener('click', () => {
-		C_IMP.ocultar();
-		C_EXP.ocultar();
+		//TODO: This is shit.
+		C_IMP.cerrar();
+		C_EXP.cerrar();
 		C_NS.mostrar();
 	}, true);
 
@@ -31,14 +32,16 @@ function Herramientas_tabla() {
 	}, true);
 
 	document.getElementById('btn_exportar').addEventListener('click', () => {
-		C_IMP.ocultar();
-		C_NS.ocultar();
+		//TODO: This is shit.
+		C_IMP.cerrar();
+		C_NS.cerrar();
 		C_EXP.mostrar();
 	}, true);
 
 	document.getElementById('btn_importar').addEventListener('click', () => {
-		C_EXP.ocultar();
-		C_NS.ocultar();
+		//TODO: This is shit.
+		C_EXP.cerrar();
+		C_NS.cerrar();
 		C_IMP.vaciar();
 		C_IMP.mostrar();
 	}, true);

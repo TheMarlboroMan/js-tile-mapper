@@ -11,7 +11,7 @@ function Caja_nuevo_set()
 	let input_style=document.getElementById('input_style');
 
 	this.mostrar=function(){DOM_caja.classList.remove('oculto');}
-	this.ocultar=function(){DOM_caja.classList.add('oculto');}
+	this.cerrar=function(){DOM_caja.classList.add('oculto');}
 	this.reiniciar=() => {
 		input_file.value='';
 		input_w.value=32;
@@ -20,7 +20,7 @@ function Caja_nuevo_set()
 		input_style.value='';
 	}
 
-	DOM_btn_cerrar.onclick=() => {this.ocultar();}
+	DOM_btn_cerrar.onclick=() => {this.cerrar();}
 	DOM_btn_crear.onclick=() => {
 		if(!FileReader) {
 			alert("Operation not supported!");
